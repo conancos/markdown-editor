@@ -56,7 +56,12 @@
       
       
       & h5 {
-        padding: .5rem;
+        display: block;
+        padding-inline: .5rem;
+        align-content: center;
+        color: #000;
+        text-shadow: 0px 1px 1px black;
+        height: 2rem;
         font-size: 1rem;
         font-weight: bolder;
         border: 2px solid #0aa;
@@ -69,18 +74,26 @@
       
       & h5 {
         text-align: left;
+        color: #FFF;
       }
       & textarea#editor {
-        width: 98.7%;
-        height: calc(98% - 2rem);
+        /* width: 98.7%; */
+        width: 100%;
+        height: calc(100% - 2rem);
         display: flex;
-        margin-block: .3rem;
-        margin-inline: auto;
+        /* margin-block: .3rem; */
+        /* margin-inline: auto; */
         resize: vertical;
         background: var(--bgcolor-interior3, #f0f);
-        border: 2px solid var(--bgcolor-interior);
+        /* outline: 2px solid var(--bgcolor-interior); */
+        color: #e0e0e0;
+        color: #000;
         font-size: 1.2rem;
+        padding: .5rem .7rem .5rem .4rem;
         font-family: monospace, system-ui;
+
+        scrollbar-width: thin;
+        scrollbar-color: var(--titulo-3) var(--bgcolor-interior1);
         &:focus {
           outline: none;
         }
@@ -95,6 +108,7 @@
         text-align: right;
       }
       & div#preview {
+        color: #e5e5e5;
         width: 100%;
         height: calc(98% - 1.5rem);
         border: 2px solid var(--bgcolor-interior);
