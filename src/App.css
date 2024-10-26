@@ -46,7 +46,8 @@
     /*border: 2px solid aqua; */
 
     & aside {
-      width: 77%;
+      width: 90%;
+      
       max-width: 550px;
       height: 65vh;
       height: 600px;
@@ -71,50 +72,55 @@
 
     & aside.a-left {
       margin-right: 0;
-      
+
       & h5 {
         text-align: left;
         color: #FFF;
       }
       & textarea#editor {
-        /* width: 98.7%; */
         width: 100%;
         height: calc(100% - 2rem);
         display: flex;
-        /* margin-block: .3rem; */
-        /* margin-inline: auto; */
         resize: vertical;
+        /* border: 2px solid var(--bgcolor-interior1); */
+        border-top: none;
         background: var(--bgcolor-interior3, #f0f);
         /* outline: 2px solid var(--bgcolor-interior); */
-        color: #e0e0e0;
-        color: #000;
+        color: #000;/* color: #e0e0e0; */
         font-size: 1.2rem;
-        padding: .5rem .7rem .5rem .4rem;
+        padding: .5rem .4rem .5rem .4rem;
         font-family: monospace, system-ui;
-
         scrollbar-width: thin;
         scrollbar-color: var(--titulo-3) var(--bgcolor-interior1);
         &:focus {
           outline: none;
         }
+        &::placeholder {
+          color: #000;
+          text-shadow: 0 0 .5px #000;
+          opacity: 1;
+        }
       }
-
     }
 
     & aside.a-right {
       margin-left: 0;
-      
       & h5 {
         text-align: right;
       }
       & div#preview {
-        color: #e5e5e5;
         width: 100%;
-        height: calc(98% - 1.5rem);
-        border: 2px solid var(--bgcolor-interior);
-        border: 2px solid var(--bgcolor-interior3);
+        height: calc(100% - 2rem);
+        color: #e5e5e5;
+        font-size: 1.2rem;
+        padding: .5rem .3rem .5rem .4rem;
+        border: 1px solid var(--bgcolor-interior3);
         border-top: none;
-        margin: auto;
+        /* margin: auto; */
+        scrollbar-width: thin;
+        scrollbar-color: var(--bgcolor-interior1) var(--titulo-3);
+        white-space: pre-wrap;
+        overflow-y: auto;
       }
     }
   }
