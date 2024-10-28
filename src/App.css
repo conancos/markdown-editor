@@ -16,14 +16,14 @@
     /* outline: 2px solid #213c; */
     
     & nav {
-      margin-inline: 2rem;
+      margin-inline: clamp(0.2rem, 2vw, 2rem);
       filter: drop-shadow(0 0 16px #0ff);
       cursor: pointer;
       user-select: none;
       
-      & span:not(last-child) {
-        font-size: 1.2rem;
-        margin-inline: .5rem;
+      & span {
+        /* font-size: 1.2rem; */
+        margin-right: .5rem;
         transition: filter .2s ease-in-out;
         &:hover {
           filter: drop-shadow(0 0 6px #0ff) drop-shadow(0 0 8px aqua);
@@ -31,9 +31,9 @@
       }
     }
 
-    & h1 {
-      font-size: 1.75rem;
-      
+    & h1.title-header{
+      font-size: clamp(1.3rem, 4vw, 2.4rem);
+      font-family: inherit;
     }
   }
 
@@ -55,14 +55,13 @@
       background: var(--bgcolor-interior1);
       /* box-shadow: 1px 1px 10px 2px var(--titulo-3); */
       
-      
-      & h5 {
-        display: block;
-        padding-inline: .5rem;
-        align-content: center;
-        color: #000;
-        text-shadow: 0px 1px 1px black;
+      /*h5 editor y preview */
+      & .title-preview, .title-editor {
         height: 2rem;
+        padding-inline: 1rem;
+        align-content: center;
+        
+        text-shadow: 0px 1px 1px black;
         font-size: 1rem;
         font-weight: bolder;
         border: 2px solid #0aa;
@@ -72,8 +71,8 @@
 
     & aside.a-left {
       margin-right: 0;
-
-      & h5 {
+      width: 45vw;
+      & .title-editor {
         text-align: left;
         color: #FFF;
       }
@@ -105,7 +104,10 @@
 
     & aside.a-right {
       margin-left: 0;
-      & h5 {
+      width: 45vw;
+      
+      & .title-preview {
+        color: #000;
         text-align: right;
       }
       & div#preview {
@@ -113,6 +115,7 @@
         height: calc(100% - 2rem);
         color: #e5e5e5;
         font-size: 1.2rem;
+        font-weight: 200;
         padding: .5rem .3rem .5rem .4rem;
         border: 1px solid var(--bgcolor-interior3);
         border-top: none;
@@ -120,7 +123,14 @@
         scrollbar-width: thin;
         scrollbar-color: var(--bgcolor-interior1) var(--titulo-3);
         white-space: pre-wrap;
-        overflow-y: auto;
+        overflow: auto;
+
+        & h1 { font-size: 2.2rem; }
+        & h2 { font-size: 1.8rem; }
+        & h3 { font-size: 1.5rem; }
+        & h4 { font-size: 1.2rem; }
+        & h5 { font-size: 1.0rem; }
+        & h6 { font-size: .8rem; }
       }
     }
   }
@@ -196,7 +206,7 @@
     background: #000;
 
     & h1 {
-      font-size: 1.2rem;
+      font-size: 4.2rem;
     }
   }
 
@@ -215,7 +225,7 @@
   
 
   
-.skin {
+/* .skin {
   background: var(--bgcolor-interior);
 }
 
@@ -227,4 +237,4 @@
 
 .preview {
   background: var(--sextenario-bgcolor);
-}
+} */

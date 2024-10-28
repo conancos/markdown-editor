@@ -15,7 +15,7 @@ const Header = () => {
     return (
         <header className="header">
             <nav><span>🔵</span><span>⚪</span><span>🟣</span></nav>
-            <h1>Estiliza en Markdown</h1>
+            <h1 className="title-header">Estiliza en Markdown</h1>
             <span style={svgStyle}></span>
         </header> 
     )
