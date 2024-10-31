@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import DOMPurify from 'dompurify'
+import { marked } from 'marked'
+
 
 
 const Aside = (props) => {
-
         
     const handleChange = (event) => {
         props.setValue(event.target.value);
@@ -15,12 +17,11 @@ const Aside = (props) => {
         } else {
             props.editorRef.current.scrollTop = event.target.scrollTop;
         }
-        props.editorRef.current.scrollTop = event.target.scrollTop;
+        /* props.editorRef.current.scrollTop = event.target.scrollTop; */
     }
     
 
-    const container = 
-        props.title === 'Editor' 
+    const container = props.title === 'Editor' 
         ? (
             <textarea 
                 id="editor"
@@ -37,15 +38,14 @@ const Aside = (props) => {
                 id="preview"
                 ref={props.previewRef}
                 onScroll={handleScroll}
-            >
-                {props.value}
-            </div>
+                dangerouslySetInnerHTML={props.createMarkup(props.value)}
+            />
         )
     ;
     
     return (
         <aside className={props.className}>
-            <h5>{props.title}</h5>
+            <h5 className={`title-${props.title.toLowerCase()}`}>{props.title}</h5>
             {container}
         </aside>
     )
@@ -57,57 +57,116 @@ const Aside = (props) => {
 
 
 const Main = () => {
-    const guidelines = `
-    # Welcome to my React Markdown Previewer!
+    const guidelines =
+`<div align="center">
 
-    ## This is a sub-heading...
-    ### And here's some other cool stuff:
+# Bienvenidos al previsualizador de Markdown en React!
 
-    Heres some code, \`<div></div>\`, between 2 backticks.
+## ESTO ES UN ENCABEZADO PARA SUBTITULOS
 
-    \`\`\`
-    // this is multi-line code:
+### \`<h3>\`Encabezado de tercer nivel\`<\\h3>\`
+#### \`<h4>\` Un texto del tamaño normal, pero en negrita
 
-    function anotherExample(firstLine, lastLine) {
-    if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
-        return multiLineCode;
-        }
+##### \`<h5>\` Otro texto de tamaño más pequeño que el normal, en negrita
+
+###### \`<h6>\` Aquí un texto de tamaño aún más pequeño</div>
+
+Si necesitas comentar algo, puedes usar la sintaxis de HTML: <--! comentario de una o varias líneas. -->
+
+Si necesitas marcar un poco de código \`<div>container</div>\`, o resaltar un \`trozo de texto\` entre 2 acentos invertidos(\`backticks\`), entre líneas.
+
+\`\`\`javascript
+// O crear un cuadro de código en varias líneas:
+
+function anotherExample(firstLine, lastLine) {
+if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
+    return multiLineCode;
     }
-    \`\`\`
+}
+\`\`\`
 
-    You can also make text **bold**... whoa!
-    Or _italic_.
-    Or... wait for it... **_both!_**
-    And feel free to go crazy ~~crossing stuff out~~.
+> Puedes usar líneas de cíta en bloque y casillas de marcado de listas:
 
-    There's also [links](https://www.freecodecamp.org), and
-    > Block Quotes!
-
-    And if you want to get really crazy, even tables:
-
-    Wild Header | Crazy Header | Another Header?
-    ------------ | ------------- | -------------
-    Your content can | be here, and it | can be here....
-    And here. | Okay. | I think we get it.
-
-    - And of course there are lists.
-    - Some are bulleted.
-        - With different indentation levels.
-            - That look like this.
+- [X] También puedes marcar texto en **negrita,** _cursiva_ o ~~texto tachado~~.
+- [ ] Puedes usar HTML para <u>subrayar texto</u>
+- [X] O marcar el texto usando <u>**~~_LOS 2 MODOS_~~**</u>
 
 
-    1. And there are numbered lists too.
-    1. Use just 1s if you want!
-    1. And last but not least, let's not forget embedded images:
+---
+>     Puedes usar diferentes niveles en bloque
+>     de varias líneas:
+> - Usando listas desordenadas
+> - También llamadas viñetas.
+>    - Con diferentes niveles de indentación.
+>    - [X] O con casillas de marcado de listas.
+>       - Y con diferentes niveles de indentación.
+>1. O usar listas numeradas
+>2. [X] con casillas de marcado de listas.
+>       1. También con diferentes
+>       2. niveles de indentación
+>           1. [X] También usando marcado de listas
+>           2. en varios niveles de indentación.
+---
 
-    ![freeCodeCamp Logo](https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg)
-    `;
+Puedes usar la etiqueta \`<br>\` para generar un salto de línea
+<br>
+
+---
+Y si quieres llevarlo al siguiente nivel, incluso tablas:
+
+
+Encabezado Salvaje | Encabezado Loco | ¿Otro encabezado?
+------------------ | --------------- | -----------------
+Tu contenido puede | estar aquí, y  | aquí también...
+Y aquí. | Vale. | Creo que lo entendemos.
+---
+
+- Enlaces a [sitios externos ↗](https://conancos.dev/portfolio#contact)
+
+- Enlaces de anclaje, [al propio documento](#Bienvenidos-al-previsualizador-de-Markdown-en-React!)
+
+
+\`\`\`Puedes usar imágenes y centrarlas:\`\`\`
+
+<div align="center">
+
+<img src='./vite.svg' alt="logo de Vite1" width="50px"/> <img src="react.svg" alt="logo de Vite2" width="50px" />
+</div>
+
+<small>O limitar su tamaño</small>: [<img src="https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg" width="200px" alt="logo de freeCodeCamp" />](https://freecodecamp.org/espanol/)
+
+<u>Y hasta establecer una imagen como una URL:</u>
+<div align="center">
+
+<--! [![Logo CONAN_COS](https://conancos.dev/next/logica-js/CashRegister/images/logo-conancos.png)](https://conancos.dev/portfolio#contact) -->
+
+O animar una parte de tu documento con un GIF:
+![imagen de un teseracto](./Teseracto.gif)
+
+<br>
+<small>Enriquece y diviértete creando tu documento markdown en tiempo real y súbelo a tu GitHub!</small>
+</div>
+
+
+`;
     const [value, setValue] = useState(guidelines);
 
     // referencias para el scroll
     const editorRef = useRef(null);
     const previewRef = useRef(null);
 
+    const createMarkup = (text) => {
+        const rawMarkup = marked(text, { 
+            gfm: true, 
+            breaks: true,
+            sanitize: true
+        }); //Convertir markdown a html
+        return { __html: DOMPurify.sanitize(rawMarkup) }; //Sanitizar
+    }
+
+    useEffect(() => {
+        setValue(guidelines);
+    }, [guidelines])
 
     return (
         <main className="main">
@@ -130,6 +189,7 @@ const Main = () => {
                 previewRef={previewRef}
                 editorRef={editorRef}
                 
+                createMarkup={createMarkup}
             />
         </main>
     )
