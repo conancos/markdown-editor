@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import DOMPurify from 'dompurify'
 import { marked } from 'marked'
-
+import markedAlert from 'marked-alert'
 
 
 const Aside = (props) => {
@@ -65,15 +65,42 @@ const Main = () => {
 ## ESTO ES UN ENCABEZADO PARA SUBTITULOS
 
 ### \`<h3>\`Encabezado de tercer nivel\`<\\h3>\`
+
 #### \`<h4>\` Un texto del tamaño normal, pero en negrita
 
 ##### \`<h5>\` Otro texto de tamaño más pequeño que el normal, en negrita
 
 ###### \`<h6>\` Aquí un texto de tamaño aún más pequeño</div>
 
-Si necesitas comentar algo, puedes usar la sintaxis de HTML: <--! comentario de una o varias líneas. -->
+<div align="center">
 
-Si necesitas marcar un poco de código \`<div>container</div>\`, o resaltar un \`trozo de texto\` entre 2 acentos invertidos(\`backticks\`), entre líneas.
+Créate un espectacular README.md para<br>
+<sub>![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)</sub> <sup>con sus:</sup>
+
+</div>
+<details>
+<summary><mark> Nuevas funcionalidades </mark></summary>
+
+> [!NOTE]
+> Destaca información que los usuarios deben tener en cuenta, incluso cuando hojean.
+
+> [!TIP]
+> Información opcional para ayudar al usuario a tener más éxito.
+
+> [!IMPORTANT]
+> Información crucial necesaria para que los usuarios tengan éxito.
+
+> [!WARNING]
+> Contenido crítico que exige atención inmediata del usuario debido a riesgos potenciales.
+
+> [!CAUTION]
+> Consecuencias potenciales negativas de una acción.
+
+</details>
+
+Si necesitas comentarios, puedes usar la sintaxis de HTML: <--! comentario de una o varias líneas. -->
+
+Si necesitas marcar código en línea: \`<div>container</div>\`, o resaltar un \`trozo de texto\` ponlo entre 2 acentos invertidos(\`backticks\`), entre líneas.
 
 \`\`\`javascript
 // O crear un cuadro de código en varias líneas:
@@ -108,7 +135,7 @@ if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
 >           2. en varios niveles de indentación.
 ---
 
-Puedes usar la etiqueta \`<br>\` para generar un salto de línea
+Puedes usar la etiqueta \`<br>\` para generar saltos de línea
 <br>
 
 ---
@@ -125,27 +152,23 @@ Y aquí. | Vale. | Creo que lo entendemos.
 
 - Enlaces de anclaje, [al propio documento](#Bienvenidos-al-previsualizador-de-Markdown-en-React!)
 
+<div align="center">
 
 \`\`\`Puedes usar imágenes y centrarlas:\`\`\`
 
-<div align="center">
-
 <img src='./vite.svg' alt="logo de Vite1" width="50px"/> <img src="react.svg" alt="logo de Vite2" width="50px" />
-</div>
 
-<small>O limitar su tamaño</small>: [<img src="https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg" width="200px" alt="logo de freeCodeCamp" />](https://freecodecamp.org/espanol/)
+<sup>O limitar su tamaño:</sup> [<img src="https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg" width="200px" alt="logo de freeCodeCamp" />](https://freecodecamp.org/espanol/)
 
-<u>Y hasta establecer una imagen como una URL:</u>
-<div align="center">
+<mark>Y hasta establecer una imagen como una URL:</mark>
 
-<--! [![Logo CONAN_COS](https://conancos.dev/next/logica-js/CashRegister/images/logo-conancos.png)](https://conancos.dev/portfolio#contact) -->
+[![Logo CONAN_COS](https://conancos.dev/next/logica-js/CashRegister/images/logo-conancos.png)](https://conancos.dev/portfolio#contact)
 
 O animar una parte de tu documento con un GIF:
 ![imagen de un teseracto](./Teseracto.gif)
 
-<br>
+
 <small>Enriquece y diviértete creando tu documento markdown en tiempo real y súbelo a tu GitHub!</small>
-</div>
 
 
 `;
@@ -156,7 +179,7 @@ O animar una parte de tu documento con un GIF:
     const previewRef = useRef(null);
 
     const createMarkup = (text) => {
-        const rawMarkup = marked(text, { 
+        const rawMarkup = marked.use(markedAlert())(text, { 
             gfm: true, 
             breaks: true,
             sanitize: true
