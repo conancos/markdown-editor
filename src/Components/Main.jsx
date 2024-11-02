@@ -72,12 +72,9 @@ const Main = () => {
 
 ###### \`<h6>\` Aquí un texto de tamaño aún más pequeño</div>
 
-<div align="center">
-
-Créate un espectacular README.md para<br>
+Créate un espectacular README.md para tu proyecto<br>
 <sub>![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)</sub> <sup>con sus:</sup>
 
-</div>
 <details>
 <summary><mark> Nuevas funcionalidades </mark></summary>
 
@@ -98,7 +95,7 @@ Créate un espectacular README.md para<br>
 
 </details>
 
-Si necesitas comentarios, puedes usar la sintaxis de HTML: <--! comentario de una o varias líneas. -->
+Si necesitas crear <em>comentarios,</em> puedes usar la sintaxis de HTML <!-- comentario de una o varias líneas. -->
 
 Si necesitas marcar código en línea: \`<div>container</div>\`, o resaltar un \`trozo de texto\` ponlo entre 2 acentos invertidos(\`backticks\`), entre líneas.
 
