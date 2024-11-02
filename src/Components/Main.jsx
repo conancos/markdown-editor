@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import DOMPurify from 'dompurify'
 import { marked } from 'marked'
 import markedAlert from 'marked-alert'
+import Prism from 'prismjs'
+import 'prismjs/themes/prism.css'
+import 'prismjs/components/prism-javascript.js'
+//import 'prismjs/themes/prism-okaidia.css'
 
 
 const Aside = (props) => {
@@ -184,10 +188,24 @@ O animar una parte de tu documento con un GIF:
         return { __html: DOMPurify.sanitize(rawMarkup) }; //Sanitizar
     }
 
+    // useEffect para detectar cambios en el código dentro de VSCODE
     useEffect(() => {
         setValue(guidelines);
-    }, [guidelines])
+    }, [guidelines]);
 
+    // useEffect para detectar cambios en el código dentro del editor MARKDOWN
+    useEffect(() => {
+        Prism.highlightAll();
+        // Seleccionamos todos los elementos <code> en línea y añadimos la clase "language-javascript"
+        const inlineCodeElements = previewRef.current.querySelectorAll('p > code');
+        inlineCodeElements.forEach((codeElement) => {
+            if (!codeElement.classList.contains('language-javascript')) {
+                codeElement.classList.add('language-javascript');
+            }
+        })
+    }, [value]);
+
+    
     return (
         <main className="main">
             <Aside 
