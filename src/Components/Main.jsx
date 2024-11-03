@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
 import DOMPurify from 'dompurify'
-import { marked } from 'marked'
+import { marked, use } from 'marked'
 import markedAlert from 'marked-alert'
 import Prism from 'prismjs'
 import 'prismjs/themes/prism.css'
 import 'prismjs/components/prism-javascript.js'
 //import 'prismjs/themes/prism-okaidia.css'
 
+marked.use(markedAlert());
+marked.setOptions({
+    gfm: true,
+    breaks: true,
+});
 
 const Aside = (props) => {
         
@@ -24,7 +29,6 @@ const Aside = (props) => {
         /* props.editorRef.current.scrollTop = event.target.scrollTop; */
     }
     
-
     const container = props.title === 'Editor' 
         ? (
             <textarea 
@@ -57,11 +61,7 @@ const Aside = (props) => {
 
 
 
-
-
-
-const Main = () => {
-    const guidelines =
+const guidelines =
 `<div align="center">
 
 # Bienvenidos al previsualizador de Markdown en React!
@@ -79,8 +79,7 @@ const Main = () => {
 Créate un espectacular README.md para tu proyecto<br>
 <sub>![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)</sub> <sup>con sus:</sup>
 
-<details>
-<summary><mark> Nuevas funcionalidades </mark></summary>
+<details><summary><mark> Nuevas funcionalidades </mark></summary>
 
 > [!NOTE]
 > Destaca información que los usuarios deben tener en cuenta, incluso cuando hojean.
@@ -142,11 +141,11 @@ Puedes usar la etiqueta \`<br>\` para generar saltos de línea
 ---
 Y si quieres llevarlo al siguiente nivel, incluso tablas:
 
+| Encabezado Salvaje | Encabezado Loco | ¿Otro encabezado? |
+| ------------------ | --------------- | ----------------- |
+| Tu contenido puede | estar aquí, y | aquí también... |
+| Y aquí. | Vale. | Creo que lo entendemos. |
 
-Encabezado Salvaje | Encabezado Loco | ¿Otro encabezado?
------------------- | --------------- | -----------------
-Tu contenido puede | estar aquí, y  | aquí también...
-Y aquí. | Vale. | Creo que lo entendemos.
 ---
 
 - Enlaces a [sitios externos ↗](https://conancos.dev/portfolio#contact)
@@ -173,20 +172,24 @@ O animar una parte de tu documento con un GIF:
 
 
 `;
+
+
+const Main = () => {
+    
     const [value, setValue] = useState(guidelines);
 
     // referencias para el scroll
     const editorRef = useRef(null);
     const previewRef = useRef(null);
 
+    useEffect(() => {
+        Prism.highlightAll();
+    }, [guidelines]);
+
     const createMarkup = (text) => {
-        const rawMarkup = marked.use(markedAlert())(text, { 
-            gfm: true, 
-            breaks: true,
-            sanitize: true
-        }); //Convertir markdown a html
+        const rawMarkup = marked(text); //Convertir markdown a html
         return { __html: DOMPurify.sanitize(rawMarkup) }; //Sanitizar
-    }
+    };
 
     // useEffect para detectar cambios en el código dentro de VSCODE
     useEffect(() => {
