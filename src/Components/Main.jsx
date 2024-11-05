@@ -1,8 +1,25 @@
-import React, { useState, useRef } from 'react'
-import guidelines from './guidelines'
+import React, { useState, useEffect, useRef } from 'react'
+import guidelines from './guidelines.js'
+import DOMPurify from 'dompurify'
+import { marked, use } from 'marked'
+import markedAlert from 'marked-alert'
+import Prism from 'prismjs'
+import 'prismjs/themes/prism.css'
+import 'prismjs/components/prism-javascript.js'
+//import 'prismjs/themes/prism-okaidia.css'
+
+
+marked.use(markedAlert());
+
+marked.setOptions({
+    gfm: true,
+    breaks: true,
+    /* highlight: (code) => Prism.highlight(code, Prism.languages.javascript, 'javascript'),
+    tables: true */
+});
+
 
 const Aside = (props) => {
-
         
     const handleChange = (event) => {
         props.setValue(event.target.value);
@@ -18,9 +35,7 @@ const Aside = (props) => {
         //props.editorRef.current.scrollTop = event.target.scrollTop;
     }
     
-
-    const container = 
-        props.title === 'Editor' 
+    const container = props.title === 'Editor' 
         ? (
             <textarea 
                 id="editor"
@@ -37,9 +52,8 @@ const Aside = (props) => {
                 id="preview"
                 ref={props.previewRef}
                 onScroll={handleScroll}
-            >
-                {props.value}
-            </div>
+                dangerouslySetInnerHTML={props.createMarkup(props.value)}
+            />
         )
     ;
     
@@ -52,18 +66,44 @@ const Aside = (props) => {
 };
 
 
-
-
-
 const Main = () => {
-
+    
     const [value, setValue] = useState(guidelines);
 
     // referencias para el scroll
     const editorRef = useRef(null);
     const previewRef = useRef(null);
 
+    useEffect(() => {
+        Prism.highlightAll();
+    }, [guidelines]);
 
+    // Convertir markdown a html y sanitizarlo
+    const createMarkup = (text) => {
+        const rawMarkup = marked(text);
+        return { __html: DOMPurify.sanitize(rawMarkup) };
+    };
+
+    // useEffect para detectar cambios en el código dentro de VSCODE
+    useEffect(() => {
+        setValue(guidelines);
+    }, [guidelines]);
+
+    // useEffect para resaltar el codigo
+    useEffect(() => {
+        const codeElements = document.querySelectorAll('#preview pre code, #preview p code');
+        
+        codeElements.forEach((codeElement) => {
+            if (!codeElement.classList.contains('language-javascript')) {
+                codeElement.classList.add('language-javascript');
+            }
+            Prism.highlightElement(codeElement);
+        });
+    }, [value]);
+    
+    
+
+    
     return (
         <main className="main">
             <Aside 
@@ -80,11 +120,11 @@ const Main = () => {
                 className="a-right" 
                 title="Preview" 
                 value={value} 
-                /* setValue={setValue} */
 
                 previewRef={previewRef}
                 editorRef={editorRef}
                 
+                createMarkup={createMarkup}
             />
         </main>
     )

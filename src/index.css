@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: system-ui, Avenir, Helvetica, Arial, sans-serif; */
   font-family: monospace;
 
   --primario-color: #5d5fef;
@@ -14,6 +14,7 @@
   --bgcolor-interior1: #104770; /*asides*/
   --bgcolor-interior2: #01070E; /*body*/
   --bgcolor-interior3: #3F71A5; /*textarea*/
+  --bgcolor-interior4: #093252; /*blockquotes*/
   --titulo-primario: #69C0AF;
   --titulo-secundario: #5BFCA2;
   --titulo-1: #0C5569;

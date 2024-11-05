@@ -13,7 +13,7 @@ const guidelines =
 
 ###### \`<h6>\` Aquí un texto de tamaño aún más pequeño</div>
 
-Créate un espectacular README.md para tu proyecto<br>
+> Créate un espectacular README.md para tu proyecto<br>
 <sub>![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)</sub> <sup>con sus:</sup>
 
 <details><summary><mark> Nuevas funcionalidades </mark></summary>
@@ -37,7 +37,7 @@ Créate un espectacular README.md para tu proyecto<br>
 
 Si necesitas crear <em>comentarios,</em> puedes usar la sintaxis de HTML <!-- comentario de una o varias líneas. -->
 
-Si necesitas marcar código en línea: \`<div>container</div>\`, o resaltar un \`trozo de texto\` ponlo entre 2 acentos invertidos(\`backticks\`), entre líneas.
+Si necesitas marcar código en línea: \`<div>container</div>\`, o resaltar un \`trozo de texto\` ponlo entre 2 acentos invertidos(\`backticks\`).
 
 \`\`\`javascript
 // O crear un cuadro de código en varias líneas:
@@ -49,41 +49,41 @@ if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
 }
 \`\`\`
 
-> Puedes usar líneas de cíta en bloque y casillas de marcado de listas:
+> Puedes usar líneas de cíta y lista de tareas:
 
 - [X] También puedes marcar texto en **negrita,** _cursiva_ o ~~texto tachado~~.
 - [ ] Puedes usar HTML para <u>subrayar texto</u>
 - [X] O marcar el texto usando <u>**~~_LOS 2 MODOS_~~**</u>
 
 
----
->     Puedes usar diferentes niveles en bloque
->     de varias líneas:
-> - Usando listas desordenadas
-> - También llamadas viñetas.
->    - Con diferentes niveles de indentación.
->    - [X] O con casillas de marcado de listas.
->       - Y con diferentes niveles de indentación.
->1. O usar listas numeradas
->2. [X] con casillas de marcado de listas.
->       1. También con diferentes
->       2. niveles de indentación
->           1. [X] También usando marcado de listas
->           2. en varios niveles de indentación.
----
+> Puedes usar diferentes niveles en **bloque**
+> de **varias líneas**:
+> - Usando <u>**Listas desordenadas**</u>
+> - También llamadas viñetas
+>    - A diferentes niveles
+>    - [X] Aquí también funcionan las casillas de _marcado de listas._
+>       - [ ] Y con mas niveles de indentación.
+> 1. [X] O usar <u>**Listas numeradas**</u>
+> 2. [ ] con casillas de marcado de listas.
+>       3. También con diferentes
+>       4. niveles de indentación.
+>           5. [X] También usando marcado de listas
+>           6. [ ] En niveles de indentación más profundos.
+
 
 Puedes usar la etiqueta \`<br>\` para generar saltos de línea
+O la etiqueta \`<hr>\` para crear una linea horizontal o 3 guiones ---
 <br>
 
----
-Y si quieres llevarlo al siguiente nivel, incluso tablas:
-
-| Encabezado Salvaje | Encabezado Loco | ¿Otro encabezado? |
-| ------------------ | --------------- | ----------------- |
-| Tu contenido puede | estar aquí, y | aquí también... |
-| Y aquí. | Vale. | Creo que lo entendemos. |
 
 ---
+<mark>Y si quieres llevarlo al siguiente nivel, incluso **tablas:**</mark>
+
+| Primera Columna | Segunda Columna | Tercera Colmna |
+| --- | --- | --- |
+| Tu contenido | Tu contenido | Tu contenido |
+| [Mi Portfolio][conancos.dev] | [Mi GitHub][mi-GitHub] | [Mi Linkedin][mi-LinkedIn] |
+
 
 - Enlaces a [sitios externos ↗](https://conancos.dev/portfolio#contact)
 
@@ -91,7 +91,7 @@ Y si quieres llevarlo al siguiente nivel, incluso tablas:
 
 <div align="center">
 
-\`\`\`Puedes usar imágenes y centrarlas:\`\`\`
+\`Puedes usar imágenes y centrarlas:\`
 
 <img src='./vite.svg' alt="logo de Vite1" width="50px"/> <img src="react.svg" alt="logo de Vite2" width="50px" />
 
@@ -104,9 +104,24 @@ Y si quieres llevarlo al siguiente nivel, incluso tablas:
 O animar una parte de tu documento con un GIF:
 ![imagen de un teseracto](./Teseracto.gif)
 
-
 <small>Enriquece y diviértete creando tu documento markdown en tiempo real y súbelo a tu GitHub!</small>
+</div>
 
+- ❗❓ Y aunque parezca increíble, puedes usar variables, que solo se verán en tu editor:
+  - 👨‍💻 [Visita mi LinkedIn][mi-LinkedIn] ↗
+  - 🚀 [Visita mi GitHub][mi-GitHub] ↗
+  - 👨‍🎓 [Visita mi portfolio][conancos.dev] ↗
+  - 👩‍🏫 [Visita freeCodeCamp][freeCodeCamp] ↗
+- 💖 Si te ayuda y quieres dejar un [comentario][mi-LinkedIn] ↗
+
+
+
+<!-- Variables -->
+
+[conancos.dev]: https://conancos.dev/portfolio
+[mi-GitHub]: https://github.com/conancos
+[mi-LinkedIn]: https://www.linkedin.com/in/joaquin-martinez-cortes/
+[freeCodeCamp]: https://freecodecamp.org/espanol
 `;
 
 export default guidelines;
