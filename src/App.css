@@ -95,7 +95,7 @@
           outline: none;
         }
         &::placeholder {
-          color: #000;
+          color: #c3c3ff;
           text-shadow: 0 0 .5px #000;
           opacity: 1;
         }

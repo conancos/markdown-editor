@@ -108,11 +108,11 @@ O animar una parte de tu documento con un GIF:
 </div>
 
 - ❗❓ Y aunque parezca increíble, puedes usar variables, que solo se verán en tu editor:
-  - 👨‍💻 [Visita mi LinkedIn ↗][mi-LinkedIn]
-  - 🚀 [Visita mi GitHub ↗][mi-GitHub]
-  - 👨‍🎓 [Visita mi portfolio ↗][conancos.dev]
-  - 👩‍🏫 [Visita freeCodeCamp ↗][freeCodeCamp]
-- 💖 Si te ayuda y quieres dejar un [comentario ↗][mi-LinkedIn]
+  - 👨‍💻 [Visita mi LinkedIn][mi-LinkedIn] ↗
+  - 🚀 [Visita mi GitHub][mi-GitHub] ↗
+  - 👨‍🎓 [Visita mi portfolio][conancos.dev] ↗
+  - 👩‍🏫 [Visita freeCodeCamp][freeCodeCamp] ↗
+- 💖 Si te ayuda y quieres dejar un [comentario][mi-LinkedIn] ↗
 
 
 

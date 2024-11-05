@@ -32,7 +32,7 @@ const Aside = (props) => {
         } else {
             props.editorRef.current.scrollTop = event.target.scrollTop;
         }
-        /* props.editorRef.current.scrollTop = event.target.scrollTop; */
+        props.editorRef.current.scrollTop = event.target.scrollTop;
     }
     
     const container = props.title === 'Editor' 
@@ -78,9 +78,10 @@ const Main = () => {
         Prism.highlightAll();
     }, [guidelines]);
 
+    // Convertir markdown a html y sanitizarlo
     const createMarkup = (text) => {
-        const rawMarkup = marked(text); //Convertir markdown a html
-        return { __html: DOMPurify.sanitize(rawMarkup) }; //Sanitizar
+        const rawMarkup = marked(text);
+        return { __html: DOMPurify.sanitize(rawMarkup) };
     };
 
     // useEffect para detectar cambios en el código dentro de VSCODE
@@ -88,17 +89,19 @@ const Main = () => {
         setValue(guidelines);
     }, [guidelines]);
 
-    // useEffect para detectar cambios en el código dentro del editor MARKDOWN
+    // useEffect para resaltar el codigo
     useEffect(() => {
-        Prism.highlightAll();
-        // Seleccionamos todos los elementos <code> en línea y añadimos la clase "language-javascript"
-        const inlineCodeElements = previewRef.current.querySelectorAll('p > code');
-        inlineCodeElements.forEach((codeElement) => {
+        const codeElements = document.querySelectorAll('#preview pre code, #preview p code');
+        
+        codeElements.forEach((codeElement) => {
             if (!codeElement.classList.contains('language-javascript')) {
                 codeElement.classList.add('language-javascript');
             }
-        })
+            Prism.highlightElement(codeElement);
+        });
     }, [value]);
+    
+    
 
     
     return (
@@ -117,7 +120,6 @@ const Main = () => {
                 className="a-right" 
                 title="Preview" 
                 value={value} 
-                /* setValue={setValue} */
 
                 previewRef={previewRef}
                 editorRef={editorRef}
