@@ -10,57 +10,90 @@ import 'prismjs/components/prism-javascript.js'
 
 
 marked.use(markedAlert());
-
 marked.setOptions({
     gfm: true,
     breaks: true,
-    /* highlight: (code) => Prism.highlight(code, Prism.languages.javascript, 'javascript'),
-    tables: true */
+    highlight: (code) => Prism.highlight(code, Prism.languages.javascript, 'javascript'),
+    //tables: true
 });
 
 
-const Aside = (props) => {
-        
-    const handleChange = (event) => {
-        props.setValue(event.target.value);
-    }
 
+const Items = ({ className, toggleExpand, isExpanded }) => (
+    <span className={className} onClick={toggleExpand} /* isExpanded={isExpanded} */ >
+        {isExpanded ? '🔽' : '🔼'}
+    </span>
+);
+
+
+const Aside = ({ 
+    className, 
+    title, 
+    value, 
+    setValue,
+    //guidelines,
+    editorRef, 
+    previewRef, 
+    createMarkup, 
+    isExpanded,
+    toggleExpand
+}) => {
+
+    const handleChange = (event) => {
+        setValue(event.target.value);
+    }
     const handleScroll = (event) => {
-        if (props.title === 'Editor') {
-            props.previewRef.current.scrollTop = event.target.scrollTop;
+        if (title === 'Editor') {
+            previewRef.current.scrollTop = event.target.scrollTop;
             
         } else {
-            props.editorRef.current.scrollTop = event.target.scrollTop;
+            editorRef.current.scrollTop = event.target.scrollTop;
         }
         //props.editorRef.current.scrollTop = event.target.scrollTop;
     }
     
-    const container = props.title === 'Editor' 
-        ? (
-            <textarea 
-                id="editor"
-                placeholder={props.guidelines}
-                onChange={handleChange}
-                value={props.value}
-
-                ref={props.editorRef}
-                onScroll={handleScroll}
-            />
-        )
-        : (
-            <div 
-                id="preview"
-                ref={props.previewRef}
-                onScroll={handleScroll}
-                dangerouslySetInnerHTML={props.createMarkup(props.value)}
-            />
-        )
-    ;
+    const Content = () => {
+        return (
+            title === 'Editor' 
+            ? (
+                <>
+                    <header className={`title-${title.toLowerCase()}`}>
+                        {title}
+                        <Items className={title === "Editor" ? "expand-icon-toright" : "expand-icon-toleft"} toggleExpand={toggleExpand} isExpanded={isExpanded} />
+                    </header>
+                    <textarea 
+                        id="editor"
+                        placeholder={guidelines}
+                        onChange={handleChange}
+                        value={value}
+                        
+                        ref={editorRef}
+                        onScroll={handleScroll}
+                        //className={isExpanded ? 'expanded' : 'collapsed'}
+                    />
+                </>
+            )
+            : (
+                <>
+                    <header className={`title-${title.toLowerCase()}`}>
+                        <Items className={title === "Editor" ? "expand-icon-toright" : "expand-icon-toleft"} toggleExpand={toggleExpand} isExpanded={isExpanded} />
+                        {title}
+                    </header>
+                    <div 
+                        id="preview"
+                        ref={previewRef}
+                        onScroll={handleScroll}
+                        dangerouslySetInnerHTML={createMarkup(value)}
+                        //className={isExpanded ? 'expanded' : 'collapsed'}
+                    />
+                </>
+            )
+        );
+    }     
     
     return (
-        <aside className={props.className}>
-            <h5 className={`title-${props.title.toLowerCase()}`}>{props.title}</h5>
-            {container}
+        <aside className={className}>
+            <Content />
         </aside>
     )
 };
@@ -69,8 +102,7 @@ const Aside = (props) => {
 const Main = () => {
     
     const [value, setValue] = useState(guidelines);
-
-    // referencias para el scroll
+    const [isExpanded, setExpanded] = useState(false);
     const editorRef = useRef(null);
     const previewRef = useRef(null);
 
@@ -99,32 +131,38 @@ const Main = () => {
             }
             Prism.highlightElement(codeElement);
         });
-    }, [value]);
-    
-    
+    }, [value, isExpanded]);
 
+    // Función para expandir o contraer el editor
+    const toggleExpand = () => {
+        setExpanded(!isExpanded);
+    };
     
     return (
         <main className="main">
             <Aside 
-                className="a-left" 
+                className={`a-left ${ isExpanded ? 'expanded' : 'collapsed'}`}
                 title="Editor" 
                 value={value} 
                 setValue={setValue}
-                guidelines={guidelines}
-                
+                //guidelines={guidelines}
                 editorRef={editorRef}
                 previewRef={previewRef}
+                createMarkup={createMarkup}
+                isExpanded={isExpanded}
+                toggleExpand={toggleExpand}
             />
             <Aside 
-                className="a-right" 
+                className={`a-right ${ isExpanded ? 'expanded' : 'collapsed'}`}
                 title="Preview" 
                 value={value} 
-
+                //setValue={setValue} // quizás no es necesario
                 previewRef={previewRef}
                 editorRef={editorRef}
                 
                 createMarkup={createMarkup}
+                isExpanded={isExpanded}
+                toggleExpand={toggleExpand}
             />
         </main>
     )

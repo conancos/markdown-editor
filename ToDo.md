@@ -1,14 +1,16 @@
 # 🔴 Editor de Markdown en React
 
-- Componente que maximiza las ventanas:
+- [x] Componente que maximiza las ventanas:
     - [ ] Descargar imagen y copiar al proyecto en ./src/assets/icons
-    - [ ] Crear componente y funcionalidad
+    - [x] Crear componente y funcionalidad
     - [ ] Crear 2º componente que copie el contenido de #Editor
 
 - [ ] Componente que centra y amplía #Preview
     - [ ] Descargar imagen y copiar al proyecto en ./src/assets/icons
     - [ ] Crear componente y funcionalidad
     - [ ] Crear 2º componente que capture imagen o pdf
+
+- [ ] Componente input type checkbox para Sync Scroll
 
 - [ ] Implementar funcionalidad para no perder los datos al actualizar pestaña.
 

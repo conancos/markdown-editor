@@ -1,9 +1,12 @@
+* {
+  transition: all .3s ease-in-out !important;
+}
 #markdown {
   display: grid;
   grid-template-rows: auto 1fr auto;
   width: 100%;
   height: 100lvh;
-  
+
 
   & header.header {
     display: flex;
@@ -41,44 +44,73 @@
     place-content: center;
     grid-gap: 1rem;
     /*border: 2px solid aqua; */
-
+    transition: all .3s ease-in-out !important;
     & aside {
-      width: 90%;
+      width: 100%;
       max-width: 550px;
-      height: 65vh;
-      height: 600px;
+      /* height: 600px; */
+      height: 100%;
       margin: 0 auto;
       background: var(--bgcolor-interior1);
       /* box-shadow: 1px 1px 10px 2px var(--titulo-3); */
-      
+      transition: all .3s ease-in-out !important;      
       /*h5 editor y preview */
       & .title-preview, .title-editor {
-        height: 2rem;
+        height: 2.1rem;
         padding-inline: 1rem;
-        align-content: center;
-        
+        /* align-content: center; */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         text-shadow: 0px 1px 1px black;
         font-size: 1rem;
         font-weight: bolder;
         border: 2px solid #0aa;
         background: var(--titulo-3);
       }
+      & .expand-icon-toright {
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: transform .1s ;
+        position: relative;
+        bottom: 1.5px;
+        &:hover {
+          /* transform: scale(1.1); */
+          /* bottom: 2px; */
+          filter: drop-shadow(0 0 4px #000);
+        }
+      }
+      & .expand-icon-toleft {
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: transform .1s ;
+        position: relative;
+        bottom: 1.5px;
+        &:hover {
+          /* transform: scale(1.1); */
+          /* bottom: 2px; */
+          filter: drop-shadow(0 0 4px #000);
+        }
+      }
     }
 
     & aside.a-left {
       margin-right: 0;
-      width: 45vw;
+      width: calc(50vw - 1rem);/*45vw;*/
+      height: 66vh;
+      transition: all .3s ease-in-out !important;
       & .title-editor {
         text-align: left;
         color: #FFF;
       }
       & textarea#editor {
         width: 100%;
-        height: calc(100% - 2rem);
+        height: calc(100% - 2.1rem);
         display: flex;
         resize: vertical;
         /* border: 2px solid var(--bgcolor-interior1); */
-        border-top: none;
+        /* border-top: none; */
+        border: none;
         background: var(--bgcolor-interior3, #f0f);
         /* outline: 2px solid var(--bgcolor-interior); */
         color: #000;/* color: #e0e0e0; */
@@ -87,6 +119,7 @@
         font-family: monospace, system-ui;
         scrollbar-width: thin;
         scrollbar-color: var(--titulo-3) var(--bgcolor-interior1);
+        transition: all .3s ease-in-out !important;
         &:focus {
           outline: none;
         }
@@ -100,8 +133,9 @@
 
     & aside.a-right {
       margin-left: 0;
-      width: 45vw;
-      
+      width: calc(50vw - 1rem);/*45vw;*/
+      height: 66vh;
+      transition: all .3s ease-in-out !important;
       & .title-preview {
         color: #000;
         text-align: right;
@@ -109,18 +143,20 @@
       & div#preview {
         position: relative;
         width: 100%;
-        height: calc(100% - 2rem);
+        height: calc(100% - 2.1rem);
         color: #e5e5e5;
         font-size: 1.2rem;
         font-weight: 200;
         padding: .5rem .3rem .5rem .4rem;
-        border: 1px solid var(--bgcolor-interior3);
+        /* border: 2px solid var(--bgcolor-interior3); */
         border-top: none;
+        border-right: none;
         /* margin: auto; */
         scrollbar-width: thin;
         scrollbar-color: var(--bgcolor-interior1) var(--titulo-3);
         white-space: pre-wrap;
         overflow: auto;
+        transition: all .3s ease-in-out !important;
 
         & h1 { font-size: 2.2rem; }
         & h2 { font-size: 1.8rem; }
@@ -128,7 +164,12 @@
         & h4 { font-size: 1.2rem; }
         & h5 { font-size: 1.0rem; }
         & h6 { font-size: .8rem; }
-
+        
+        & pre {
+          scrollbar-width: thin;
+          box-shadow: inset 0 0 14px #000;
+        }
+                
         & blockquote {
           border-left: 4px solid #ccc;
           padding-left: 25px;
@@ -266,6 +307,16 @@
           }
         }  
       }
+    }
+    & .expanded {
+      width: calc(50vw - 1rem);
+      max-width: unset;
+      height: 89vh !important;
+      transition: all .3s ease-in-out !important;
+    }
+    & .collapsed {
+      height: 66vh !important;
+      transition: all .3s ease-in-out !important;
     }
   }
 

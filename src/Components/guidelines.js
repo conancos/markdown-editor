@@ -49,7 +49,7 @@ if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
 }
 \`\`\`
 
-> Puedes usar líneas de cíta y lista de tareas:
+> Puedes usar líneas de cita y lista de tareas:
 
 - [X] También puedes marcar texto en **negrita,** _cursiva_ o ~~texto tachado~~.
 - [ ] Puedes usar HTML para <u>subrayar texto</u>
