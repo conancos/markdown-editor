@@ -55,6 +55,7 @@
       /* box-shadow: 1px 1px 10px 2px var(--titulo-3); */
       transition: all .3s ease-in-out !important;      
       /*h5 editor y preview */
+      
       & .title-preview, .title-editor {
         height: 2.1rem;
         padding-inline: 1rem;
@@ -65,8 +66,14 @@
         text-shadow: 0px 1px 1px black;
         font-size: 1rem;
         font-weight: bolder;
-        border: 2px solid #0aa;
+        /* border: 2px solid #0aa; */
         background: var(--titulo-3);
+      }
+      & .title-preview {
+        box-shadow: var(--header-title-morphism-blue-right);
+      }
+      & .title-editor {
+        box-shadow: var(--header-title-morphism-blue-left);
       }
       & .expand-icon-toright {
         font-size: 1.5rem;
@@ -111,14 +118,16 @@
         /* border: 2px solid var(--bgcolor-interior1); */
         /* border-top: none; */
         border: none;
-        background: var(--bgcolor-interior3, #f0f);
+        background: var(--bgcolor-interior3);
+        background: var(--bg-gradient-text-area-blue);
+        box-shadow: var(--box-shadow-text-area-blue);
         /* outline: 2px solid var(--bgcolor-interior); */
         color: #000;/* color: #e0e0e0; */
         font-size: 1.2rem;
-        padding: .5rem .4rem .5rem .4rem;
+        padding: 1rem .8rem 1rem .8rem;
         font-family: monospace, system-ui;
         scrollbar-width: thin;
-        scrollbar-color: var(--titulo-3) var(--bgcolor-interior1);
+        scrollbar-color: var(--bgcolor-interior4) var(--titulo-3);
         transition: all .3s ease-in-out !important;
         &:focus {
           outline: none;
@@ -147,13 +156,14 @@
         color: #e5e5e5;
         font-size: 1.2rem;
         font-weight: 200;
-        padding: .5rem .3rem .5rem .4rem;
+        padding: .5rem .4rem .5rem .4rem;
         /* border: 2px solid var(--bgcolor-interior3); */
         border-top: none;
         border-right: none;
+        box-shadow: var(--box-shadow-div-preview-blue);
         /* margin: auto; */
         scrollbar-width: thin;
-        scrollbar-color: var(--bgcolor-interior1) var(--titulo-3);
+        scrollbar-color: var(--bgcolor-interior4) var(--titulo-3);
         white-space: pre-wrap;
         overflow: auto;
         transition: all .3s ease-in-out !important;
@@ -168,6 +178,7 @@
         & pre {
           scrollbar-width: thin;
           box-shadow: inset 0 0 14px #000;
+          border-radius: 6px;
         }
                 
         & blockquote {
@@ -178,19 +189,21 @@
           background: var(--bgcolor-interior4);
           border-radius: 6px;
 
-          & ul li ul, ul li ul li ul,
-          ol li, ol li ol, ol li ol li ol {
-            padding-left: 25px;
+          & ul li ul, ul li ul li ul, 
+          ol li ol, ol li ol li ol {
+            padding-left: 30px;
             padding-block: 0px;
             margin-block: 0px;
+            margin-bottom: -35px !important;
             border: 0px solid black;
           }
-          & ul, ol {
-            margin-bottom: -15px !important;
-          }
-          & ol {
+          /* & ul, ol {
+            margin-bottom: -30px !important;
+            padding-bottom: 10px;
+          } */
+          /* & ol {
             padding-left: 10px;
-          }
+          } */
         }
         & input[type="checkbox"],
           blockquote input[type="checkbox"] {
@@ -295,8 +308,8 @@
 
         & ul, ol {
           margin-bottom: -10px !important;
-          padding-left: 20px;
-          padding-bottom: 0px;
+          padding-left: 25px;
+          /* padding-bottom: 0px; */
           
           & li p/* , li p input[type="checkbox"] */  {
             display: flex;
@@ -312,11 +325,11 @@
       width: calc(50vw - 1rem);
       max-width: unset;
       height: 89vh !important;
-      transition: all .3s ease-in-out !important;
+      transition: all .6s ease-in-out !important;
     }
     & .collapsed {
       height: 66vh !important;
-      transition: all .3s ease-in-out !important;
+      transition: all .6s ease-in-out !important;
     }
   }
 

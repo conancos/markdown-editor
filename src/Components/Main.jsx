@@ -20,7 +20,7 @@ marked.setOptions({
 
 
 const Items = ({ className, toggleExpand, isExpanded }) => (
-    <span className={className} onClick={toggleExpand} /* isExpanded={isExpanded} */ >
+    <span className={className} onClick={toggleExpand} role='button' >
         {isExpanded ? '🔽' : '🔼'}
     </span>
 );
@@ -52,48 +52,46 @@ const Aside = ({
         //props.editorRef.current.scrollTop = event.target.scrollTop;
     }
     
-    const Content = () => {
-        return (
-            title === 'Editor' 
-            ? (
-                <>
-                    <header className={`title-${title.toLowerCase()}`}>
-                        {title}
-                        <Items className={title === "Editor" ? "expand-icon-toright" : "expand-icon-toleft"} toggleExpand={toggleExpand} isExpanded={isExpanded} />
-                    </header>
-                    <textarea 
-                        id="editor"
-                        placeholder={guidelines}
-                        onChange={handleChange}
-                        value={value}
-                        
-                        ref={editorRef}
-                        onScroll={handleScroll}
-                        //className={isExpanded ? 'expanded' : 'collapsed'}
-                    />
-                </>
-            )
-            : (
-                <>
-                    <header className={`title-${title.toLowerCase()}`}>
-                        <Items className={title === "Editor" ? "expand-icon-toright" : "expand-icon-toleft"} toggleExpand={toggleExpand} isExpanded={isExpanded} />
-                        {title}
-                    </header>
-                    <div 
-                        id="preview"
-                        ref={previewRef}
-                        onScroll={handleScroll}
-                        dangerouslySetInnerHTML={createMarkup(value)}
-                        //className={isExpanded ? 'expanded' : 'collapsed'}
-                    />
-                </>
-            )
+    const Content = title === 'Editor' 
+        ? (
+            <>
+                <header className={`title-${title.toLowerCase()}`}>
+                    {title}
+                    <Items className={title === "Editor" ? "expand-icon-toright" : "expand-icon-toleft"} toggleExpand={toggleExpand} isExpanded={isExpanded} />
+                </header>
+                <textarea 
+                    id="editor"
+                    placeholder={guidelines}
+                    onChange={handleChange}
+                    value={value}
+                    
+                    ref={editorRef}
+                    onScroll={handleScroll}
+                    //className={isExpanded ? 'expanded' : 'collapsed'}
+                />
+            </>
+        )
+        : (
+            <>
+                <header className={`title-${title.toLowerCase()}`}>
+                    <Items className={title === "Editor" ? "expand-icon-toright" : "expand-icon-toleft"} toggleExpand={toggleExpand} isExpanded={isExpanded} />
+                    {title}
+                </header>
+                <div 
+                    id="preview"
+                    ref={previewRef}
+                    onScroll={handleScroll}
+                    dangerouslySetInnerHTML={createMarkup(value)}
+                    //className={isExpanded ? 'expanded' : 'collapsed'}
+                />
+            </>
         );
-    }     
+        
+    ; 
     
     return (
         <aside className={className}>
-            <Content />
+            {Content} 
         </aside>
     )
 };
@@ -145,18 +143,16 @@ const Main = () => {
                 title="Editor" 
                 value={value} 
                 setValue={setValue}
-                //guidelines={guidelines}
+                //guidelines={guidelines} la he importado
                 editorRef={editorRef}
                 previewRef={previewRef}
-                createMarkup={createMarkup}
                 isExpanded={isExpanded}
                 toggleExpand={toggleExpand}
             />
             <Aside 
                 className={`a-right ${ isExpanded ? 'expanded' : 'collapsed'}`}
-                title="Preview" 
-                value={value} 
-                //setValue={setValue} // quizás no es necesario
+                title="Preview"
+                value={value}
                 previewRef={previewRef}
                 editorRef={editorRef}
                 

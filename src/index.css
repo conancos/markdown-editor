@@ -14,6 +14,9 @@
   --bgcolor-interior1: #104770; /*asides*/
   --bgcolor-interior2: #01070E; /*body*/
   --bgcolor-interior3: #3F71A5; /*textarea*/
+  --bg-gradient-text-area-blue: linear-gradient(90deg, #4379b1, #396695 ); /*textarea morphism*/
+  --box-shadow-text-area-blue: -4px 6px 8px 0px #2b4e72aa; /*box-shadow textarea morphism*/
+  --box-shadow-div-preview-blue: 4px 6px 8px 0px #2b4e72aa; /*box-shadow preview morphism*/
   --bgcolor-interior4: #093252; /*blockquotes*/
   --titulo-primario: #69C0AF;
   --titulo-secundario: #5BFCA2;
@@ -21,6 +24,9 @@
   --titulo-2: #244d6d;
   --titulo-3: #007cdd; /*titulos*/
   --titulo-4: #886ce4;
+
+  --header-title-morphism-blue-left: inset 2px -2px 4px 2px #005698, inset -2px 2px 4px 2px #00a2ff; /*título editor morphism*/ 
+  --header-title-morphism-blue-right: inset -2px -2px 4px 2px #005698, inset 2px 2px 4px 2px #00a2ff; /*títulos preview morphism*/
 }
 
 * {
