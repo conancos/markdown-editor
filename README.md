@@ -222,6 +222,11 @@ function anotherExample(firstLine, lastLine) {
 
 #### [Ir al inicio ⬆ ](#bienvenidos-a-mi-previsualizador-de-markdown-en-react "Subir al principio")
 
+<br>
+<!--Copyright © 2024 conan_cos - bajo licencia <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License v3.0</a>-->
+
+
+Copyright © 2024 conan_cos - bajo licencia [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html)
 </div>
 
 
@@ -233,3 +238,4 @@ function anotherExample(firstLine, lastLine) {
 [mi-GitHub]: https://github.com/conancos "A GitHub"
 [mi-LinkedIn]: https://www.linkedin.com/in/joaquin-martinez-cortes/ "A LinkedIn"
 [freeCodeCamp]: https://freecodecamp.org/espanol "A freeCodeCamp"
+[license]: https://www.gnu.org/licenses/gpl-3.0.html
