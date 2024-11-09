@@ -178,7 +178,7 @@ function anotherExample(firstLine, lastLine) {
 
 ### Tus imágenes:
 
-<img src='./vite.svg' alt="logo de Vite1" width="50px"/> <img src="react.svg" alt="logo de Vite2" width="50px" />
+<img src='./vite.svg' alt="logo de Vite1" width="50px"/> <img src="./react.svg" alt="logo de Vite2" width="50px" />
 
 <sup>Limitando su tamaño para situarlas junto al texto:</sup> <img src="https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg" width="200px" alt="logo de freeCodeCamp" />
 
@@ -192,7 +192,7 @@ function anotherExample(firstLine, lastLine) {
 
 
 
-## ✨ _Crea y Enriquece tu documento markdown_ como un profesional y <br> _en tiempo real_ 🔴
+## ✨ _Crea y Enriquece tu documento markdown_ como un profesional y <br> 🔴 _en tiempo real_:  [Pruébalo!](https://conancos.dev/markdown-editor/)
 
 
 
@@ -216,13 +216,18 @@ function anotherExample(firstLine, lastLine) {
 ## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 👩‍🏫 [Visita freeCodeCamp ↗][freeCodeCamp]
 <div align="center">
 
-### Si te gusta el editor y lo usas, puedes dejar un [💖comentario ↗][mi-LinkedIn] gracias!
+### Si te gusta el editor y lo usas, puedes dejar un [💖comentario ↗][comentario] gracias!
 </div>
 
 <div align="center">
 
 #### [Ir al inicio ⬆ ](#bienvenidos-a-mi-previsualizador-de-markdown-en-react "Subir al principio")
 
+<br>
+<!--Copyright © 2024 conan_cos - bajo licencia <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License v3.0</a>-->
+
+
+Copyright © 2024 conan_cos - bajo licencia [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.html)
 </div>
 
 
@@ -234,6 +239,8 @@ function anotherExample(firstLine, lastLine) {
 [mi-GitHub]: https://github.com/conancos "A GitHub"
 [mi-LinkedIn]: https://www.linkedin.com/in/joaquin-martinez-cortes/ "A LinkedIn"
 [freeCodeCamp]: https://freecodecamp.org/espanol "A freeCodeCamp"
+[license]: https://www.gnu.org/licenses/gpl-3.0.html
+[comentario]: https://www.linkedin.com/posts/joaquin-martinez-cortes_nuevoproyecto-activity-7260907343922544640-Bgbq?utm_source=share&utm_medium=member_desktop
 `;
 
 export default guidelines;
