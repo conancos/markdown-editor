@@ -76,11 +76,11 @@
         box-shadow: var(--header-title-morphism-blue-left);
       }
       & .expand-icon-toright {
-        font-size: 1.5rem;
+        transform: scale(1.3);
         cursor: pointer;
         transition: transform .1s ;
         position: relative;
-        bottom: 1.5px;
+        top: 1px;
         &:hover {
           /* transform: scale(1.1); */
           /* bottom: 2px; */
@@ -88,11 +88,11 @@
         }
       }
       & .expand-icon-toleft {
-        font-size: 1.5rem;
+        transform: scale(1.3);
         cursor: pointer;
         transition: transform .1s ;
         position: relative;
-        bottom: 1.5px;
+        top: 1px;
         &:hover {
           /* transform: scale(1.1); */
           /* bottom: 2px; */
@@ -103,6 +103,7 @@
 
     & aside.a-left {
       margin-right: 0;
+      margin-block: auto;
       width: calc(50vw - 1rem);/*45vw;*/
       height: 66vh;
       transition: all .3s ease-in-out !important;
@@ -142,6 +143,7 @@
 
     & aside.a-right {
       margin-left: 0;
+      margin-block: auto;
       width: calc(50vw - 1rem);/*45vw;*/
       height: 66vh;
       transition: all .3s ease-in-out !important;

@@ -7,7 +7,7 @@ import Prism from 'prismjs'
 import 'prismjs/themes/prism.css'
 import 'prismjs/components/prism-javascript.js'
 //import 'prismjs/themes/prism-okaidia.css'
-
+import { ItemsLeft, ItemsRight } from './Items'
 
 marked.use(markedAlert());
 marked.setOptions({
@@ -18,30 +18,23 @@ marked.setOptions({
 });
 
 
-
-const Items = ({ className, toggleExpand, isExpanded }) => (
-    <span className={className} onClick={toggleExpand} role='button' >
-        {isExpanded ? '🔽' : '🔼'}
-    </span>
-);
-
-
 const Aside = ({ 
     className, 
     title, 
     value, 
     setValue,
-    //guidelines,
     editorRef, 
     previewRef, 
     createMarkup, 
     isExpanded,
     toggleExpand
+    
 }) => {
 
     const handleChange = (event) => {
         setValue(event.target.value);
     }
+
     const handleScroll = (event) => {
         if (title === 'Editor') {
             previewRef.current.scrollTop = event.target.scrollTop;
@@ -57,24 +50,30 @@ const Aside = ({
             <>
                 <header className={`title-${title.toLowerCase()}`}>
                     {title}
-                    <Items className={title === "Editor" ? "expand-icon-toright" : "expand-icon-toleft"} toggleExpand={toggleExpand} isExpanded={isExpanded} />
+                    <ItemsLeft 
+                        className="expand-icon-toright" 
+                        toggleExpand={toggleExpand} 
+                        isExpanded={isExpanded}
+                    />
                 </header>
                 <textarea 
                     id="editor"
                     placeholder={guidelines}
                     onChange={handleChange}
                     value={value}
-                    
                     ref={editorRef}
                     onScroll={handleScroll}
-                    //className={isExpanded ? 'expanded' : 'collapsed'}
                 />
             </>
         )
         : (
             <>
                 <header className={`title-${title.toLowerCase()}`}>
-                    <Items className={title === "Editor" ? "expand-icon-toright" : "expand-icon-toleft"} toggleExpand={toggleExpand} isExpanded={isExpanded} />
+                    <ItemsRight 
+                        className="expand-icon-toleft"
+                        toggleExpand={toggleExpand}
+                        isExpanded={isExpanded}
+                    />
                     {title}
                 </header>
                 <div 
@@ -82,7 +81,6 @@ const Aside = ({
                     ref={previewRef}
                     onScroll={handleScroll}
                     dangerouslySetInnerHTML={createMarkup(value)}
-                    //className={isExpanded ? 'expanded' : 'collapsed'}
                 />
             </>
         );
@@ -100,7 +98,9 @@ const Aside = ({
 const Main = () => {
     
     const [value, setValue] = useState(guidelines);
-    const [isExpanded, setExpanded] = useState(false);
+    //const [isExpanded, setExpanded] = useState(false);
+    const [isEditorExpanded, setEditorExpanded] = useState(false);
+    const [isPreviewExpanded, setPreviewExpanded] = useState(false);
     const editorRef = useRef(null);
     const previewRef = useRef(null);
 
@@ -129,36 +129,37 @@ const Main = () => {
             }
             Prism.highlightElement(codeElement);
         });
-    }, [value, isExpanded]);
+    }, [value, isEditorExpanded, isPreviewExpanded]);
 
-    // Función para expandir o contraer el editor
-    const toggleExpand = () => {
-        setExpanded(!isExpanded);
+    // Función para expandir o contraer: editor y previsualizador
+    const toggleEditorExpand = () => {
+        setEditorExpanded(!isEditorExpanded);
+    };
+    const togglePreviewExpand = () => {
+        setPreviewExpanded(!isPreviewExpanded);
     };
     
     return (
         <main className="main">
             <Aside 
-                className={`a-left ${ isExpanded ? 'expanded' : 'collapsed'}`}
+                className={`a-left ${ isEditorExpanded ? 'expanded' : 'collapsed'}`}
                 title="Editor" 
                 value={value} 
                 setValue={setValue}
-                //guidelines={guidelines} la he importado
                 editorRef={editorRef}
                 previewRef={previewRef}
-                isExpanded={isExpanded}
-                toggleExpand={toggleExpand}
+                isExpanded={isEditorExpanded}
+                toggleExpand={toggleEditorExpand}
             />
             <Aside 
-                className={`a-right ${ isExpanded ? 'expanded' : 'collapsed'}`}
+                className={`a-right ${ isPreviewExpanded ? 'expanded' : 'collapsed'}`}
                 title="Preview"
                 value={value}
                 previewRef={previewRef}
                 editorRef={editorRef}
-                
                 createMarkup={createMarkup}
-                isExpanded={isExpanded}
-                toggleExpand={toggleExpand}
+                isExpanded={isPreviewExpanded}
+                toggleExpand={togglePreviewExpand}
             />
         </main>
     )
