@@ -36,12 +36,16 @@
   box-sizing: border-box;
 }
 
+html {
+  scrollbar-width: thin;;
+  scrollbar-color: #0ff var(--titulo-3);
 
+}
 body {
   color: #e3e3e3;
   background: var(--bgcolor-interior2);
   min-height: 100lvh;
   width: 100%;
-
-
+  
+  
 }
