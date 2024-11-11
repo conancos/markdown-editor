@@ -1,4 +1,4 @@
-import markdown2 from '../assets/icons/markdown2.svg'
+const markdown2 = new URL('../assets/icons/markdown2.svg', import.meta.url).href
 
 const Header = () => {
 
