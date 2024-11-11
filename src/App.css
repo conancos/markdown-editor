@@ -17,7 +17,7 @@
     
     & nav {
       margin-inline: clamp(0.2rem, 2vw, 2rem);
-      filter: drop-shadow(0 0 16px #0ff);
+      filter: drop-shadow(0 0 8px var(--blue-marine-markup-git)) drop-shadow(0 0 12px var(--blue-marine-markup-git));
       cursor: pointer;
       user-select: none;
       
