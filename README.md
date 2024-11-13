@@ -185,7 +185,7 @@ function anotherExample(firstLine, lastLine) {
 
 ##### Dale un toque sutil y sorprende con una **Animación** GIF:
 
-![imagen de un teseracto](./Teseracto.gif)
+![imagen de un teseracto](./public/Teseracto.gif)
 
 
 
