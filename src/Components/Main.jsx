@@ -7,7 +7,7 @@ import Prism from 'prismjs'
 import 'prismjs/themes/prism.css'
 import 'prismjs/components/prism-javascript.js'
 //import 'prismjs/themes/prism-okaidia.css'
-import { ItemsLeft, ItemsRight } from './Items'
+import { ExpandLeft, ExpandRight } from './Items-Main/ExpandIndividual'
 
 marked.use(markedAlert());
 marked.setOptions({
@@ -50,7 +50,7 @@ const Aside = ({
             <>
                 <header className={`title-${title.toLowerCase()}`}>
                     {title}
-                    <ItemsLeft 
+                    <ExpandLeft 
                         className="expand-icon-toright" 
                         toggleExpand={toggleExpand} 
                         isExpanded={isExpanded}
@@ -69,7 +69,7 @@ const Aside = ({
         : (
             <>
                 <header className={`title-${title.toLowerCase()}`}>
-                    <ItemsRight 
+                    <ExpandRight 
                         className="expand-icon-toleft"
                         toggleExpand={toggleExpand}
                         isExpanded={isExpanded}
