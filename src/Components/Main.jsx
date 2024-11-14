@@ -8,6 +8,7 @@ import 'prismjs/themes/prism.css'
 import 'prismjs/components/prism-javascript.js'
 //import 'prismjs/themes/prism-okaidia.css'
 import { ExpandLeft, ExpandRight } from './Items-Main/ExpandIndividual'
+import { ExpandFull, /* CollapseFull */ } from './Items-Main/Expand-fullscreen'
 
 marked.use(markedAlert());
 marked.setOptions({
@@ -27,8 +28,9 @@ const Aside = ({
     previewRef, 
     createMarkup, 
     isExpanded,
-    toggleExpand
-    
+    toggleExpand,
+    isExpandedFull,
+    toggleExpandFull,
 }) => {
 
     const handleChange = (event) => {
@@ -55,6 +57,11 @@ const Aside = ({
                         toggleExpand={toggleExpand} 
                         isExpanded={isExpanded}
                     />
+                    <ExpandFull 
+                        className="expandfull-icon-left"
+                        isExpandedFull={isExpandedFull}
+                        toggleExpandFull={toggleExpandFull}
+                    />
                 </header>
                 <textarea 
                     id="editor"
@@ -69,10 +76,15 @@ const Aside = ({
         : (
             <>
                 <header className={`title-${title.toLowerCase()}`}>
+                    <ExpandFull 
+                        className="expandfull-icon-right"
+                        toggleExpandFull={toggleExpandFull}
+                        isExpandedFull={isExpandedFull}
+                    />
                     <ExpandRight 
                         className="expand-icon-toleft"
-                        toggleExpand={toggleExpand}
                         isExpanded={isExpanded}
+                        toggleExpand={toggleExpand}
                     />
                     {title}
                 </header>
@@ -98,12 +110,14 @@ const Aside = ({
 const Main = () => {
     
     const [value, setValue] = useState(guidelines);
-    //const [isExpanded, setExpanded] = useState(false);
+    const [isEditorExpandedFull, setEditorExpandedFull] = useState(false);
+    const [isPreviewExpandedFull, setPreviewExpandedFull] = useState(false);
     const [isEditorExpanded, setEditorExpanded] = useState(false);
     const [isPreviewExpanded, setPreviewExpanded] = useState(false);
     const editorRef = useRef(null);
     const previewRef = useRef(null);
 
+    // useEffect para resaltar el codigo
     useEffect(() => {
         Prism.highlightAll();
     }, [guidelines]);
@@ -138,11 +152,25 @@ const Main = () => {
     const togglePreviewExpand = () => {
         setPreviewExpanded(!isPreviewExpanded);
     };
+
+    // Función para expandir o contraer fullscreen: editor o previsualizador
+    const toggleFullscreenEditor = () => {
+        setEditorExpandedFull((prev) => !prev);
+        setPreviewExpanded(false);
+        setPreviewExpandedFull(false);
+        console.log("isEditorExpandedFull: ", !isEditorExpandedFull);
+    };
+    const toggleFullscreenPreview = () => {
+        setPreviewExpandedFull((prev) => !prev);
+        setEditorExpanded(false);
+        setEditorExpandedFull(false);
+        console.log("isPreviewExpandedFull: ", !isPreviewExpandedFull);
+    };
     
     return (
         <main className="main">
             <Aside 
-                className={`a-left ${ isEditorExpanded ? 'expanded' : 'collapsed'}`}
+                className={`a-left ${isEditorExpanded ? 'expanded' : 'collapsed'} ${isEditorExpandedFull ? 'expanded-full' : ''} ${isPreviewExpandedFull ? 'hidden' : ''}`}
                 title="Editor" 
                 value={value} 
                 setValue={setValue}
@@ -150,9 +178,11 @@ const Main = () => {
                 previewRef={previewRef}
                 isExpanded={isEditorExpanded}
                 toggleExpand={toggleEditorExpand}
+                isExpandedFull={isEditorExpandedFull}
+                toggleExpandFull={toggleFullscreenEditor}
             />
             <Aside 
-                className={`a-right ${ isPreviewExpanded ? 'expanded' : 'collapsed'}`}
+                className={`a-right ${isPreviewExpanded ? 'expanded' : 'collapsed'} ${isPreviewExpandedFull ? 'expanded-full' : ''} ${isEditorExpandedFull ? 'hidden' : ''}`}
                 title="Preview"
                 value={value}
                 previewRef={previewRef}
@@ -160,6 +190,8 @@ const Main = () => {
                 createMarkup={createMarkup}
                 isExpanded={isPreviewExpanded}
                 toggleExpand={togglePreviewExpand}
+                isExpandedFull={isPreviewExpandedFull}
+                toggleExpandFull={toggleFullscreenPreview}
             />
         </main>
     )

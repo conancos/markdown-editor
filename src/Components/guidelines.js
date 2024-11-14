@@ -41,19 +41,6 @@ const guidelines =
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <hr>
 <br>
 
@@ -75,11 +62,6 @@ function anotherExample(firstLine, lastLine) {
 
 
 
-
-
-
-
-
 <br>
 <hr>
 
@@ -98,13 +80,11 @@ function anotherExample(firstLine, lastLine) {
 
 
 
-
 > * Puedes crear **listas desordenadas**
 > * También llamadas viñetas,
 >    * añadiéndolas en diferentes niveles.
 >       * [X] Donde puedes indentar elementos de lista _ToDo_
 >       * [x] Como ésta segunda línea de lista.
-
 
 
 
@@ -119,7 +99,6 @@ function anotherExample(firstLine, lastLine) {
 >
 ></details>
 >
-
 
 
 
@@ -168,7 +147,6 @@ function anotherExample(firstLine, lastLine) {
 >\`[moverse por el documento](#cualquier-encabezado-en-minúsculas-sin-emoticonos-signos-ni-variables)\`
 
 
-
 <hr color="lime">
 
 > [!IMPORTANT]
@@ -190,14 +168,7 @@ function anotherExample(firstLine, lastLine) {
 
 
 
-
-
 ## ✨ _Crea y Enriquece tu documento markdown_ como un profesional y <br> 🔴 _en tiempo real_:  [Pruébalo!](https://conancos.dev/markdown-editor/)
-
-
-
-
-
 
 
 
