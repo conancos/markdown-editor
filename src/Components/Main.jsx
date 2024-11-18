@@ -8,7 +8,8 @@ import 'prismjs/themes/prism.css'
 import 'prismjs/components/prism-javascript.js'
 //import 'prismjs/themes/prism-okaidia.css'
 import { ExpandLeft, ExpandRight } from './Items-Main/ExpandIndividual'
-import { ExpandFull, /* CollapseFull */ } from './Items-Main/Expand-fullscreen'
+import { ExpandFull } from './Items-Main/Expand-fullscreen'
+import DesynchronizeScroll from './Items-Main/desynchronize-scroll.jsx'
 
 marked.use(markedAlert());
 marked.setOptions({
@@ -23,7 +24,7 @@ const Aside = ({
     className, 
     title, 
     value, 
-    setValue,
+    /* setValue, */
     editorRef, 
     previewRef, 
     createMarkup, 
@@ -31,13 +32,17 @@ const Aside = ({
     toggleExpand,
     isExpandedFull,
     toggleExpandFull,
+    isSynced,
+    setIsSynced,
+    handleInputChange,
+    /* setIsModified */
 }) => {
 
-    const handleChange = (event) => {
-        setValue(event.target.value);
-    }
+    
 
-    const handleScroll = (event) => {
+    const handleScroll = (event, title) => {
+        if (!isSynced) return;
+
         if (title === 'Editor') {
             previewRef.current.scrollTop = event.target.scrollTop;
             
@@ -52,6 +57,7 @@ const Aside = ({
             <>
                 <header className={`title-${title.toLowerCase()}`}>
                     {title}
+                    <DesynchronizeScroll isSynced={isSynced} toggleSync={setIsSynced} />
                     <ExpandLeft 
                         className="expand-icon-toright" 
                         toggleExpand={toggleExpand} 
@@ -66,10 +72,11 @@ const Aside = ({
                 <textarea 
                     id="editor"
                     placeholder={guidelines}
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                     value={value}
                     ref={editorRef}
-                    onScroll={handleScroll}
+                    onScroll={(event) => handleScroll(event, 'Editor')}
+                    
                 />
             </>
         )
@@ -91,7 +98,7 @@ const Aside = ({
                 <div 
                     id="preview"
                     ref={previewRef}
-                    onScroll={handleScroll}
+                    onScroll={(event) => handleScroll(event, 'Preview') }
                     dangerouslySetInnerHTML={createMarkup(value)}
                 />
             </>
@@ -116,8 +123,10 @@ const Main = () => {
     const [isPreviewExpanded, setPreviewExpanded] = useState(false);
     const editorRef = useRef(null);
     const previewRef = useRef(null);
+    const [isSynced, setIsSynced] = useState(true);
+    const [isModified, setIsModified] = useState(false);
 
-    // useEffect para resaltar el codigo
+    // resaltar el código cuando cambie guidelines
     useEffect(() => {
         Prism.highlightAll();
     }, [guidelines]);
@@ -133,7 +142,7 @@ const Main = () => {
         setValue(guidelines);
     }, [guidelines]);
 
-    // useEffect para resaltar el codigo
+    // useEffect para resaltar el codigo cuando cambie value, isEditorExpanded o isPreviewExpanded
     useEffect(() => {
         const codeElements = document.querySelectorAll('#preview pre code, #preview p code');
         
@@ -145,15 +154,11 @@ const Main = () => {
         });
     }, [value, isEditorExpanded, isPreviewExpanded]);
 
-    // Función para expandir o contraer: editor y previsualizador
-    const toggleEditorExpand = () => {
-        setEditorExpanded(!isEditorExpanded);
-    };
-    const togglePreviewExpand = () => {
-        setPreviewExpanded(!isPreviewExpanded);
-    };
+    // Funciones para "EXPANDIR" o "CONTRAER": editor y/o previsualizador individualmente
+    const toggleEditorExpand = () => { setEditorExpanded(!isEditorExpanded) };
+    const togglePreviewExpand = () => { setPreviewExpanded(!isPreviewExpanded) };
 
-    // Función para expandir o contraer fullscreen: editor o previsualizador
+    // Funciones fullscreen
     const toggleFullscreenEditor = () => {
         setEditorExpandedFull((prev) => !prev);
         setPreviewExpanded(false);
@@ -167,6 +172,39 @@ const Main = () => {
         console.log("isPreviewExpandedFull: ", !isPreviewExpandedFull);
     };
     
+    // Función que detecta cambios  
+    const handleInputChange = (event) => {
+        setValue(event.target.value);
+        setIsModified(true);
+    }
+    // UseEffect para detectar si se cierra o actualiza la pestaña antes del guardado.
+    useEffect(() => {
+        const handleBeforeUnload = (event) => {
+            if (isModified) {
+                event.preventDefault();
+                event.returnValue = '';
+            }
+        };
+        // Agregar el listener al cargar el componente
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        
+        // Limpiar el listener al desmontar el componente
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+    }, [isModified]);
+    
+    
+    // Función para confirmación para salir sin guardar
+    /* const confirmExit = () => {
+        if (isModified) {
+            return window.confirm('Tienes cambios sin guardar. ¿Deseas salir sin guardar?');
+        }
+        return true;
+    } */
+    /* window.addEventListener('beforeunload', confirmExit); */
+    /* window.addEventListener('click', confirmExit); */
+
     return (
         <main className="main">
             <Aside 
@@ -180,6 +218,11 @@ const Main = () => {
                 toggleExpand={toggleEditorExpand}
                 isExpandedFull={isEditorExpandedFull}
                 toggleExpandFull={toggleFullscreenEditor}
+                isSynced={isSynced}
+                setIsSynced={setIsSynced}
+                /* onChange={handleInputChange} */
+                setIsModified={setIsModified}
+                handleInputChange={handleInputChange}
             />
             <Aside 
                 className={`a-right ${isPreviewExpanded ? 'expanded' : 'collapsed'} ${isPreviewExpandedFull ? 'expanded-full' : ''} ${isEditorExpandedFull ? 'hidden' : ''}`}
@@ -192,6 +235,8 @@ const Main = () => {
                 toggleExpand={togglePreviewExpand}
                 isExpandedFull={isPreviewExpandedFull}
                 toggleExpandFull={toggleFullscreenPreview}
+                isSynced={isSynced}
+                setIsSynced={setIsSynced}
             />
         </main>
     )

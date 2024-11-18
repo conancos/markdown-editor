@@ -1,0 +1,39 @@
+.desync-scroll {
+    /* font-size: clamp(0.7rem, 2vw, 1.2rem); */
+    font-size: 1.2rem;
+    line-height: .8;
+    margin-left: auto;
+    color: #000;
+    text-shadow: initial;
+    user-select: none;
+    text-align: right;
+    & label {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+    & label input[type="checkbox"]:checked {
+        background: #f00;
+        accent-color: var(--bgcolor-interior2);
+    }
+    & label input[type="checkbox"] {
+        width: 1.45rem;
+        height: 1.45rem;
+        margin-right: .3rem;
+        /* position: relative;
+        top: 3px; */
+        cursor: pointer;
+    }
+}
+
+
+@media (width <= 480px) and (width > 425px) {
+    .desync-scroll {
+        font-size: .8rem;
+    }
+}
+@media (width <= 270px) {
+    .desync-scroll {
+        font-size: .8rem;
+    }
+}

@@ -80,7 +80,7 @@
       }
       & .expand-icon-toright {
         margin-inline: .5rem;
-        margin-left: auto;
+        /* margin-left: auto; */
         cursor: pointer;
         
         position: relative;
