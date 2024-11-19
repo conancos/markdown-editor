@@ -24,7 +24,7 @@ const Aside = ({
     className, 
     title, 
     value, 
-    /* setValue, */
+    setValue,
     editorRef, 
     previewRef, 
     createMarkup, 
@@ -34,13 +34,17 @@ const Aside = ({
     toggleExpandFull,
     isSynced,
     setIsSynced,
-    handleInputChange,
-    /* setIsModified */
+    /* handleInputChange, */
+    setIsModified
 }) => {
 
-    
+        // Función que detecta cambios  
+    const handleInputChange = (event) => {
+        setValue(event.target.value);
+        setIsModified(true);
+    }    
 
-    const handleScroll = (event, title) => {
+    const handleScroll = (event) => {
         if (!isSynced) return;
 
         if (title === 'Editor') {
@@ -57,7 +61,10 @@ const Aside = ({
             <>
                 <header className={`title-${title.toLowerCase()}`}>
                     {title}
-                    <DesynchronizeScroll isSynced={isSynced} toggleSync={setIsSynced} />
+                    <DesynchronizeScroll 
+                        isSynced={isSynced} 
+                        toggleSync={setIsSynced} 
+                    />
                     <ExpandLeft 
                         className="expand-icon-toright" 
                         toggleExpand={toggleExpand} 
@@ -161,22 +168,18 @@ const Main = () => {
     // Funciones fullscreen
     const toggleFullscreenEditor = () => {
         setEditorExpandedFull((prev) => !prev);
-        setPreviewExpanded(false);
+        //setPreviewExpanded(prev);
         setPreviewExpandedFull(false);
-        console.log("isEditorExpandedFull: ", !isEditorExpandedFull);
+        //console.log("isEditorExpandedFull: ", !isEditorExpandedFull);
     };
     const toggleFullscreenPreview = () => {
         setPreviewExpandedFull((prev) => !prev);
-        setEditorExpanded(false);
+        // setEditorExpanded(false);
         setEditorExpandedFull(false);
-        console.log("isPreviewExpandedFull: ", !isPreviewExpandedFull);
+        //console.log("isPreviewExpandedFull: ", !isPreviewExpandedFull);
     };
     
-    // Función que detecta cambios  
-    const handleInputChange = (event) => {
-        setValue(event.target.value);
-        setIsModified(true);
-    }
+    
     // UseEffect para detectar si se cierra o actualiza la pestaña antes del guardado.
     useEffect(() => {
         const handleBeforeUnload = (event) => {
@@ -222,7 +225,7 @@ const Main = () => {
                 setIsSynced={setIsSynced}
                 /* onChange={handleInputChange} */
                 setIsModified={setIsModified}
-                handleInputChange={handleInputChange}
+                /* handleInputChange={handleInputChange} */
             />
             <Aside 
                 className={`a-right ${isPreviewExpanded ? 'expanded' : 'collapsed'} ${isPreviewExpandedFull ? 'expanded-full' : ''} ${isEditorExpandedFull ? 'hidden' : ''}`}
