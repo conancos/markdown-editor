@@ -32,8 +32,8 @@ const Aside = ({
     toggleExpand,
     isExpandedFull,
     toggleExpandFull,
-    isSynced,
-    setIsSynced,
+    isSyncro,
+    setIsSyncro,
     /* handleInputChange, */
     setIsModified
 }) => {
@@ -45,7 +45,7 @@ const Aside = ({
     }    
 
     const handleScroll = (event) => {
-        if (!isSynced) return;
+        if (!isSyncro) return;
 
         if (title === 'Editor') {
             previewRef.current.scrollTop = event.target.scrollTop;
@@ -62,8 +62,8 @@ const Aside = ({
                 <header className={`title-${title.toLowerCase()}`}>
                     {title}
                     <DesynchronizeScroll 
-                        isSynced={isSynced} 
-                        toggleSync={setIsSynced} 
+                        isSyncro={isSyncro} 
+                        toggleSync={setIsSyncro} 
                     />
                     <ExpandLeft 
                         className="expand-icon-toright" 
@@ -128,31 +128,30 @@ const Main = () => {
     const [isPreviewExpandedFull, setPreviewExpandedFull] = useState(false);
     const [isEditorExpanded, setEditorExpanded] = useState(false);
     const [isPreviewExpanded, setPreviewExpanded] = useState(false);
+    const [isSyncro, setIsSyncro] = useState(true);
+    const [isModified, setIsModified] = useState(false);
     const editorRef = useRef(null);
     const previewRef = useRef(null);
-    const [isSynced, setIsSynced] = useState(true);
-    const [isModified, setIsModified] = useState(false);
 
-    // resaltar el código cuando cambie guidelines
+   
+    // detectar cambios en el código dentro de VSCODE
     useEffect(() => {
-        Prism.highlightAll();
+        setValue(guidelines);
     }, [guidelines]);
-
+    
     // Convertir markdown a html y sanitizarlo
     const createMarkup = (text) => {
         const rawMarkup = marked(text);
         return { __html: DOMPurify.sanitize(rawMarkup) };
     };
 
-    // useEffect para detectar cambios en el código dentro de VSCODE
+    // resaltar el código cuando cambie guidelines
     useEffect(() => {
-        setValue(guidelines);
+        Prism.highlightAll();
     }, [guidelines]);
-
-    // useEffect para resaltar el codigo cuando cambie value, isEditorExpanded o isPreviewExpanded
+    // resaltar el codigo cuando cambie value, isEditorExpanded o isPreviewExpanded
     useEffect(() => {
         const codeElements = document.querySelectorAll('#preview pre code, #preview p code');
-        
         codeElements.forEach((codeElement) => {
             if (!codeElement.classList.contains('language-javascript')) {
                 codeElement.classList.add('language-javascript');
@@ -168,15 +167,11 @@ const Main = () => {
     // Funciones fullscreen
     const toggleFullscreenEditor = () => {
         setEditorExpandedFull((prev) => !prev);
-        //setPreviewExpanded(prev);
         setPreviewExpandedFull(false);
-        //console.log("isEditorExpandedFull: ", !isEditorExpandedFull);
     };
     const toggleFullscreenPreview = () => {
         setPreviewExpandedFull((prev) => !prev);
-        // setEditorExpanded(false);
         setEditorExpandedFull(false);
-        //console.log("isPreviewExpandedFull: ", !isPreviewExpandedFull);
     };
     
     
@@ -198,15 +193,7 @@ const Main = () => {
     }, [isModified]);
     
     
-    // Función para confirmación para salir sin guardar
-    /* const confirmExit = () => {
-        if (isModified) {
-            return window.confirm('Tienes cambios sin guardar. ¿Deseas salir sin guardar?');
-        }
-        return true;
-    } */
-    /* window.addEventListener('beforeunload', confirmExit); */
-    /* window.addEventListener('click', confirmExit); */
+    
 
     return (
         <main className="main">
@@ -221,8 +208,8 @@ const Main = () => {
                 toggleExpand={toggleEditorExpand}
                 isExpandedFull={isEditorExpandedFull}
                 toggleExpandFull={toggleFullscreenEditor}
-                isSynced={isSynced}
-                setIsSynced={setIsSynced}
+                isSyncro={isSyncro}
+                setIsSyncro={setIsSyncro}
                 /* onChange={handleInputChange} */
                 setIsModified={setIsModified}
                 /* handleInputChange={handleInputChange} */
@@ -238,8 +225,8 @@ const Main = () => {
                 toggleExpand={togglePreviewExpand}
                 isExpandedFull={isPreviewExpandedFull}
                 toggleExpandFull={toggleFullscreenPreview}
-                isSynced={isSynced}
-                setIsSynced={setIsSynced}
+                isSyncro={isSyncro}
+                setIsSyncro={setIsSyncro}
             />
         </main>
     )
