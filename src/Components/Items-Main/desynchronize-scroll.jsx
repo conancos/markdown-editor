@@ -2,17 +2,17 @@ import "./styles/components.css";
 
 const DesynchronizeScroll = ({ isSyncro, toggleSync }) => {
     return (
-        <div className="desync-scroll">
-            <label>
+        <span className="desync-scroll">
+            <label title="Barra de scroll">
                 <input 
                     type="checkbox" 
                     checked={isSyncro} 
                     onChange={(e) => toggleSync(e.target.checked)} 
                     /* defaultChecked="true" */
                 />
-                Sincro.
+                Sincro
             </label>
-        </div>
+        </span>
     );
 }
 

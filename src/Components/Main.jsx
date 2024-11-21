@@ -10,6 +10,7 @@ import 'prismjs/components/prism-javascript.js'
 import { ExpandLeft, ExpandRight } from './Items-Main/ExpandIndividual'
 import { ExpandFull } from './Items-Main/Expand-fullscreen'
 import DesynchronizeScroll from './Items-Main/desynchronize-scroll.jsx'
+import SaveButton from './Items-Main/SaveButton'
 
 marked.use(markedAlert());
 marked.setOptions({
@@ -34,11 +35,12 @@ const Aside = ({
     toggleExpandFull,
     isSyncro,
     setIsSyncro,
-    /* handleInputChange, */
-    setIsModified
+    setIsModified,
+    /* isSaved,
+    setIsSaved */
 }) => {
 
-        // Función que detecta cambios  
+        // Función que detecta cambios 
     const handleInputChange = (event) => {
         setValue(event.target.value);
         setIsModified(true);
@@ -100,6 +102,7 @@ const Aside = ({
                         isExpanded={isExpanded}
                         toggleExpand={toggleExpand}
                     />
+                    <SaveButton />
                     {title}
                 </header>
                 <div 
@@ -210,9 +213,7 @@ const Main = () => {
                 toggleExpandFull={toggleFullscreenEditor}
                 isSyncro={isSyncro}
                 setIsSyncro={setIsSyncro}
-                /* onChange={handleInputChange} */
                 setIsModified={setIsModified}
-                /* handleInputChange={handleInputChange} */
             />
             <Aside 
                 className={`a-right ${isPreviewExpanded ? 'expanded' : 'collapsed'} ${isPreviewExpandedFull ? 'expanded-full' : ''} ${isEditorExpandedFull ? 'hidden' : ''}`}
