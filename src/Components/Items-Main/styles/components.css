@@ -13,7 +13,7 @@
     box-shadow: 0px 2px 2px #000, inset 0px -2px 10px #000;
     border-radius: 10%;
     user-select: none;
-    cursor: pointer;
+    cursor: wait;
     &:hover {
         filter: drop-shadow(0 0 4px #003d);
     }
@@ -34,7 +34,7 @@
     box-shadow: 0px 2px 2px #000, inset 0px -2px 10px #000;
     border-radius: 2px 4px 4px 2px;
     user-select: none;
-    cursor: pointer;
+    cursor: wait;
 
     &:hover {
         filter: drop-shadow(0 0 4px #000);
@@ -95,7 +95,7 @@
     box-shadow: 0px 2px 2px #000, inset 0px -2px 10px #000, inset 0px 2px 5px #5cc3;
     border-radius: 10%;
     user-select: none;
-    cursor: pointer;
+    cursor: wait;
     &:hover {
         filter: drop-shadow(0 0 4px #003d);
     }
