@@ -8,9 +8,11 @@ import 'prismjs/themes/prism.css'
 import 'prismjs/components/prism-javascript.js'
 //import 'prismjs/themes/prism-okaidia.css'
 import { ExpandLeft, ExpandRight } from './Items-Main/ExpandIndividual'
-import { ExpandFull } from './Items-Main/Expand-fullscreen'
-import DesynchronizeScroll from './Items-Main/desynchronize-scroll.jsx'
+import ExpandFull from './Items-Main/Expand-fullscreen'
+import DesynchronizeScroll from './Items-Main/desynchronize-scroll'
 import SaveButton from './Items-Main/SaveButton'
+import Trash from './Items-Main/Trash'
+import CopyText from './Items-Main/CopyText'
 
 marked.use(markedAlert());
 marked.setOptions({
@@ -63,6 +65,8 @@ const Aside = ({
             <>
                 <header className={`title-${title.toLowerCase()}`}>
                     {title}
+                    <CopyText />
+                    <Trash />
                     <DesynchronizeScroll 
                         isSyncro={isSyncro} 
                         toggleSync={setIsSyncro} 
@@ -101,6 +105,10 @@ const Aside = ({
                         className="expand-icon-toleft"
                         isExpanded={isExpanded}
                         toggleExpand={toggleExpand}
+                    />
+                    <DesynchronizeScroll 
+                        isSyncro={isSyncro} 
+                        toggleSync={setIsSyncro} 
                     />
                     <SaveButton />
                     {title}

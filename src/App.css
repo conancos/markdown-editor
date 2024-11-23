@@ -78,6 +78,7 @@
       & .title-editor {
         box-shadow: var(--header-title-morphism-blue-left);
       }
+
       & .expand-icon-toright,
         & .expand-icon-toleft {
         height: 23px;
@@ -117,7 +118,11 @@
           filter: drop-shadow(0 0 2px #003d);
         }
       }
-      
+      /* others items in is place */
+    }
+    & #editor, #preview {
+        scrollbar-width: thin;
+        scrollbar-color: aqua var(--titulo-3);
     }
       
     & aside.a-left.expanded, 
@@ -160,7 +165,7 @@
       margin-block: auto;
       width: calc(50vw - 1rem);/*45vw;*/
       height: 66vh;
-      /* transition: all .3s ease-in-out !important; */
+      
       & .title-editor {
         text-align: left;
         color: #FFF;
@@ -169,21 +174,18 @@
         width: 100%;
         height: calc(100% - 2.1rem);
         display: flex;
-        resize: vertical;
-        /* border: 2px solid var(--bgcolor-interior1); */
-        /* border-top: none; */
+        resize: none;
         border: none;
         background: var(--bgcolor-interior3);
         background: var(--bg-gradient-text-area-blue);
         box-shadow: var(--box-shadow-text-area-blue);
-        /* outline: 2px solid var(--bgcolor-interior); */
+        
         color: #000;/* color: #e0e0e0; */
         font-size: 1.2rem;
         padding: 1rem .8rem 1rem .8rem;
         font-family: monospace, system-ui;
-        scrollbar-width: thin;
-        scrollbar-color: var(--bgcolor-interior4) var(--titulo-3);
-        /* transition: all .3s ease-in-out !important; */
+        /* scrollbar-width: thin;
+        scrollbar-color: var(--bgcolor-interior4) var(--titulo-3); */
         &:focus {
           outline: none;
         }
@@ -219,12 +221,12 @@
         border-right: none;
         box-shadow: var(--box-shadow-div-preview-blue);
         /* margin: auto; */
-        scrollbar-width: thin;
-        scrollbar-color: var(--bgcolor-interior4) var(--titulo-3);
+        /* scrollbar-width: thin;
+        scrollbar-color: var(--bgcolor-interior4) var(--titulo-3); */
         white-space: pre-wrap;
         overflow: auto;
-        /* transition: all .3s ease-in-out !important; */
-
+        
+        /* for markdown syntax */
         & h1 { font-size: 2.2rem; }
         & h2 { font-size: 1.8rem; }
         & h3 { font-size: 1.5rem; }
@@ -409,7 +411,19 @@
 
 /* RESPONSIVE MODE 📱💻 */
 
-@media (width <= 425px) {
+@media (width <= 620px) and (width > 525px) {
+  #markdown main.main aside .title-editor,
+    #markdown main.main aside .title-preview {
+      padding-inline: .5rem;
+    }
+  }
+@media (width < 325px) {
+  #markdown main.main aside .title-editor,
+    #markdown main.main aside .title-preview {
+      padding-inline: .5rem;
+    }
+  }
+@media (width <= 525px) {
   #markdown main.main {
     display: flex;
     flex-direction: column;

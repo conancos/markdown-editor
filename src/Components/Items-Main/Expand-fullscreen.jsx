@@ -9,4 +9,4 @@ const ExpandFull = ({ className, toggleExpandFull, isExpandedFull }) => (
 );
 
 
-export { ExpandFull }
+export default ExpandFull
