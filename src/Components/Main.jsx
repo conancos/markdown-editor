@@ -65,8 +65,8 @@ const Aside = ({
             <>
                 <header className={`title-${title.toLowerCase()}`}>
                     {title}
-                    <CopyText />
-                    <Trash />
+                    <CopyText value={value} />
+                    <Trash setValue={setValue} />
                     <DesynchronizeScroll 
                         isSyncro={isSyncro} 
                         toggleSync={setIsSyncro} 

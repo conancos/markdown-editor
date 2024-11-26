@@ -1,17 +1,35 @@
+import { useState } from "react";
 import "./styles/components.css";
 import copyText from'./icons/copy-text-md.svg';
 
-const CopyText = (setValue) => {
+const CopyText = ({ value }) => {
+    const [copied, setCopied] = useState(false);
+    
+    const handleCopy = () => {
+        navigator.clipboard.writeText(value)
+        .then (() => {
+            console.log('Copiado al portapapeles');
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        })
+        .catch((err) => {
+            console.error('Error al copiar al portapapeles: ', err);
+        });
+    };
+    
     return (
-        <span 
-            className="copy-text"
-            role="button" 
-            title="Copiar contenido plano"
-            // onClick para copiar el texto del editor
-            onClick={() => navigator.clipboard.writeText(setValue)}
-        >
-            <img src={copyText} alt="copy text" />
-        </span>
+        <>
+            <span 
+                className="copy-text"
+                role="button" 
+                title="Copiar contenido plano"
+                onClick={handleCopy}
+            >
+                <img src={copyText} alt="copy text" />
+            </span>
+            {/* Mensaje de confirmación */}
+            {copied && <span className="copy-confirmation">Copiado al portapapeles</span>}
+        </>
     );
 }
 

@@ -169,6 +169,7 @@
       & .title-editor {
         text-align: left;
         color: #FFF;
+        position: relative; /* Para el funcionamiento de .copy-confirmation en components.css */
       }
       & textarea#editor {
         width: 100%;

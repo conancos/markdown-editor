@@ -1,7 +1,7 @@
 import "./styles/components.css";
 import trash from "./icons/trash.svg";
 
-const Trash = (setValue) => {
+const Trash = ({setValue}) => {
     return (
         <span 
             className="trash-button"
