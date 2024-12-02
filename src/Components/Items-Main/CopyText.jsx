@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./styles/components.css";
 import copyText from'./icons/copy-text-md.svg';
 
-const CopyText = ({ value }) => {
+const CopyText = ({ value, setIsModified }) => {
     const [copied, setCopied] = useState(false);
     
     const handleCopy = () => {
@@ -10,6 +10,7 @@ const CopyText = ({ value }) => {
         .then (() => {
             console.log('Copiado al portapapeles');
             setCopied(true);
+            setIsModified(false);
             setTimeout(() => setCopied(false), 2000);
         })
         .catch((err) => {

@@ -37,12 +37,10 @@ const Aside = ({
     toggleExpandFull,
     isSyncro,
     setIsSyncro,
-    setIsModified,
-    /* isSaved,
-    setIsSaved */
-}) => {
+    isModified,
+    setIsModified }) => {
 
-        // Función que detecta cambios 
+    // Función que detecta cambios 
     const handleInputChange = (event) => {
         setValue(event.target.value);
         setIsModified(true);
@@ -65,7 +63,7 @@ const Aside = ({
             <>
                 <header className={`title-${title.toLowerCase()}`}>
                     {title}
-                    <CopyText value={value} />
+                    <CopyText value={value} setIsModified={setIsModified} />
                     <Trash 
                         setValue={setValue} 
                         setIsModified={setIsModified}
@@ -92,7 +90,6 @@ const Aside = ({
                     value={value}
                     ref={editorRef}
                     onScroll={(event) => handleScroll(event, 'Editor')}
-                    
                 />
             </>
         )
@@ -113,7 +110,10 @@ const Aside = ({
                         isSyncro={isSyncro} 
                         toggleSync={setIsSyncro} 
                     />
-                    <SaveButton />
+                    <SaveButton 
+                        value={value}
+                        setIsModified={setIsModified}  
+                    />
                     {title}
                 </header>
                 <div 
@@ -124,7 +124,6 @@ const Aside = ({
                 />
             </>
         );
-        
     ; 
     
     return (
@@ -148,7 +147,7 @@ const Main = () => {
     const previewRef = useRef(null);
 
    
-    // detectar cambios en el código dentro de VSCODE
+ // detectar cambios en el código dentro de VSCODE
     useEffect(() => {
         setValue(guidelines);
     }, [guidelines]);
@@ -188,13 +187,14 @@ const Main = () => {
         setEditorExpandedFull(false);
     };
     
-    
     // UseEffect para detectar si se cierra o actualiza la pestaña antes del guardado.
     useEffect(() => {
         const handleBeforeUnload = (event) => {
             if (isModified) {
-                event.preventDefault();
-                event.returnValue = '';
+                const confirmationMessage = "Tienes cambios sin guardar. ¿Seguro que quieres salir?";
+                //event.preventDefault();
+                event.returnValue = confirmationMessage;
+                return confirmationMessage;
             }
         };
         // Agregar el listener al cargar el componente
@@ -205,8 +205,6 @@ const Main = () => {
             window.removeEventListener('beforeunload', handleBeforeUnload);
         };
     }, [isModified]);
-    
-    
     
 
     return (
@@ -239,6 +237,8 @@ const Main = () => {
                 toggleExpandFull={toggleFullscreenPreview}
                 isSyncro={isSyncro}
                 setIsSyncro={setIsSyncro}
+                isModified={isModified}
+                setIsModified={setIsModified}
             />
         </main>
     )

@@ -102,7 +102,7 @@
     }
 }
 
-/* SaveButton.jsx */
+/* SaveButton.jsx - Save to MD or PDF file. */
 .save-button {
     /* display: flex; */
     /* align-self: center; */
@@ -117,13 +117,90 @@
     box-shadow: 0px 2px 2px #000, inset 0px -2px 10px #000, inset 0px 2px 5px #5cc3;
     border-radius: 10%;
     user-select: none;
-    cursor: wait;
+    cursor: pointer;
     &:hover {
         filter: drop-shadow(0 0 4px #003d);
     }
 }
+.save-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--bgcolor-interior2), var(--bgcolor-interior1), var(--bgcolor-interior2));
+    
+    box-shadow: 0px 0px 36px 0px #0ff2;
+    animation: getIn .4s ease;
+    
+    &::backdrop {
+        background: #000a;
+        backdrop-filter: blur(2px);
+        animation: getIn .4s ease;
+    }
 
+    & p {
+        margin-block: .5rem 1rem;
+        margin-inline: .5rem;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: var(--bgcolor-interior3);
+        color: aqua;
+        text-shadow: .5px 1px 1px /* var(--bgcolor-interior3) */;
+    }
+    & .buttons-dialog button {
+        margin-inline: .5rem;
+        width: 65px;
+        padding: .4rem;
+        margin-block: .5rem 1rem;
+        border: none;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        user-select: none;
+        border-radius: 10px;
+        background: var(--bgcolor-interior3);
+        background: aqua;
+        box-shadow: 0px 2px 2px #003, inset 0px -2px 10px #003;
+        transition: .2s;
+        &:hover {
+            box-shadow: 0 0 4px 2px #0ff, inset 0 -2px 10px #003;
+        }
+    }
+    & .button-exit {
+        width: 75px;
+        margin-block: .7rem .5rem;
+        border: none;
+        padding: .4rem;
+        margin-inline: .5rem;
+        color: white;
+        cursor: pointer;
+        user-select: none;
+        border-radius: 10px;
+        /* text-shadow: 0px 0px 4px #000; */
+        
+        text-shadow: 0px 0px 4px #000;
+        background: var(--bgcolor-interior1);
+        box-shadow: 0px 2px 2px #000, inset 0px -2px 10px #000;
+        transition: .2s;
+        &:hover {
+            box-shadow: 0 0 4px 2px var(--titulo-3), inset 0 -2px 10px #003, inset 0px 2px 4px var(--titulo-3);
+        }
+    }
+}
+@keyframes getIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
 
+/* Media Queries Responsive Móvil */
 @media (width <= 768px) and (width > 525px) {
     .copy-text {
         margin-inline: auto .0rem;
